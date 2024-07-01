@@ -1,0 +1,648 @@
+<!-- ADD SUPPLY REQUEST -->
+
+<div class="modal fade" id="addSupplyRequest" tabindex="-1" aria-labelledby="addSupplyRequestModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addSupplyRequestModalLabel">Add Supply Request</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addSupplyRequestModalLabel" action="{% url 'supply_chain:add_supplyreqs'%}" method="post">                
+                    {% csrf_token %}
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                                <label for="req_num" class="form-label" required>Request Number</label>
+                                <input type="number" class="form-control" id="req_num" name="req_num" placeholder="Request Number" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Select Staff</label>
+                            <select class="form-control" id="staff_id" name="staff_id" required>
+                                <option value="">Select Staff</option>
+                                    {% for staff in staff_list %}
+                                <option value="{{ staff.id }}">{{staff.first_name}} {{staff.last_name}}</option>
+                                    {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Select Branch</label>
+                            <select class="form-control" id="branch_id" name="branch_id" required>
+                                <option value="">Select Branch</option>
+                                {% for branch in branch_list %}
+                                <option value="{{ branch.id }}">{{branch.branch_name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Date Requested</label>
+                            <input type="text" class="form-control" id="datepicker" name="date_requested" placeholder="Date Requested" required/>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Select Driver</label>
+                            <select class="form-control" id="driver_staff_id" name="driver_staff" required>
+                                <option value="">Select Driver</option>
+                                {% for staff in staff_list %}
+                                <option value="{{ staff.id }}">{{ staff.first_name }} {{ staff.last_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Truck</label>
+                            <input type="text" class="form-control" id="driver_truck" name="driver_truck" placeholder="Truck" required/>
+                        </div>
+                    </div>
+                    
+                        <div class="col-md-12">
+                            <label for="description" class="form-label">Delivered Date</label>
+                            <input class="form-control" id="datepicker2" name="date_delivered" placeholder="Delviered Date" required/>
+                        </div>   
+
+                    <button type="submit" class="btn btn-success">Save</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- VIEW SUPPLY REQUEST MODAL -->
+
+<div class="modal fade" id="ViewModal" tabindex="-1" aria-labelledby="addSupplyRequestModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addSupplyRequestModalLabel">Supply Request Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>                
+                    {% csrf_token %}
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="role_id" class="form-label">Request Number</label>
+                            <input type="text" class="form-control" id="req_num" name="req_num" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Staff</label>
+                            <input type="text" class="form-control" name="staff_name" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Branch</label>
+                            <input type="text" class="form-control" name="branch_name" readonly>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Date Requested</label>
+                            <input type="text" class="form-control" name="date_requested" readonly>
+                        </div>
+
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Driver</label>
+                            <input type="text" class="form-control" name="driver_staff" readonly>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Truck</label>
+                            <input type="text" class="form-control" name="driver_truck" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Date Requested</label>
+                            <input type="text" class="form-control" name="date_delivered" readonly>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Status</label>
+                            <input type="text" class="form-control" name="status" readonly>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- EDIT SUPPLY REQUEST MODAL -->
+
+<div class="modal fade" id="UpdateModal" tabindex="-1" aria-labelledby="addSupplyRequestModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addSupplyRequestModalLabel">Update Supply Request Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>                
+                    {% csrf_token %}
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <input type="" id="id_edit" name="id_edit" readonly hidden>
+                            <label for="description" class="form-label">Request Number</label>
+                            <input type="number" class="form-control" id="req_num_edit" name="req_num_edit" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Change Staff</label>
+                            <select class="form-control" id="staff_id_edit" name="staff_id" required>
+                                <option value="">Select Staff</option>
+                                {% for staff in staff_list %}
+                                    <option value="{{ staff.id }}">{{staff.first_name}} {{staff.last_name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Change Branch</label>
+                            <select class="form-control" id="branch_id_edit" name="branch_id" required>
+                                <option value="">Select Branch</option>
+                                {% for branch in branch_list %}
+                                    <option value="{{ branch.id }}">{{branch.branch_name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Date Requested</label>
+                            <input type="text" class="form-control" id="datepicker_edit" name="date_requested_edit" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Change Driver</label>
+                            <select class="form-control" id="driver_staff_edit" name="driver_staff_id" required>
+                                <option value="">Select Driver</option>
+                                {% for staff in staff_list %}
+                                    <option value="{{ staff.id }}">{{staff.first_name}} {{staff.last_name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Truck</label>
+                            <input type="text" class="form-control" id="driver_truck_edit" name="driver_truck_edit" required>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="description" class="form-label">Delivered Date</label>
+                        <input type="text" class="form-control" id="datepicker2_edit" name="date_delivered_edit" required>
+                    </div>
+
+                    <button id="btn_update_info" class="btn btn-success">Update Data</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CHANGE SUPPLY REQUEST STATUS -->
+
+<div class="modal fade" id="UpdateStatusModal" tabindex="-1" aria-labelledby="addSupplyRequestModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addSupplyRequestModalLabel">Update Supply Request Status</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>                
+                    {% csrf_token %}
+                    <div class="mb-3">
+                            <input type="" id="id_status" name="id_status" readonly hidden>
+                            <label for="description" class="form-label">Staff</label>
+                            <input type="text" class="form-control" name="staff_name" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                            <label for="description" class="form-label">Branch</label>
+                            <input type="text" class="form-control" name="branch_name" readonly>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label for="description" class="form-label" placeholder="Change Status" required>Change Status</label>
+                            <select class="form-control" id="status_status" name="status_status">
+                                <option value="">Select Status</option>
+                                <option value="ACTIVE">Activate</option>
+                                <option value="DISABLED">Disable</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button id="btn_update_status" class="btn btn-success">Update Status</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- DELETE SUPPLY REQUEST MODAL -->
+
+<div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="addSupplyRequestModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addSupplyRequestModalLabel">Delete Warehouse Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>                
+                    {% csrf_token %}
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <input type="" id="id_delete" name="id_delete" readonly hidden>
+                            <label for="role_id" class="form-label">Request Number</label>
+                            <input type="text" class="form-control" id="req_num" name="req_num" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Staff</label>
+                            <input type="text" class="form-control" name="staff_name" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Branch</label>
+                            <input type="text" class="form-control" name="branch_name" readonly>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Date Requested</label>
+                            <input type="text" class="form-control" name="date_requested" readonly>
+                        </div>
+
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Driver</label>
+                            <input type="text" class="form-control" name="driver_staff" readonly>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Truck</label>
+                            <input type="text" class="form-control" name="driver_truck" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Date Requested</label>
+                            <input type="text" class="form-control" name="date_delivered" readonly>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Status</label>
+                            <input type="text" class="form-control" name="status" readonly>
+                        </div>
+                    </div>
+                    <button id="btn_delete_info" class="btn btn-danger">Delete Supply Request</button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- RECOVER SUPPLY REQUEST MODAL -->
+
+<div class="modal fade" id="RecoverModal" tabindex="-1" aria-labelledby="addSupplyRequestModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addSupplyRequestModalLabel">Supply Request Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>                
+                    {% csrf_token %}
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <input type="" id="id_recover" name="id_recover" readonly hidden>
+                            <label for="role_id" class="form-label">Request Number</label>
+                            <input type="text" class="form-control" id="req_num" name="req_num" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Staff</label>
+                            <input type="text" class="form-control" name="staff_name" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Branch</label>
+                            <input type="text" class="form-control" name="branch_name" readonly>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Date Requested</label>
+                            <input type="text" class="form-control" name="date_requested" readonly>
+                        </div>
+
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Driver</label>
+                            <input type="text" class="form-control" name="driver_staff" readonly>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Truck</label>
+                            <input type="text" class="form-control" name="driver_truck" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Date Requested</label>
+                            <input type="text" class="form-control" name="date_delivered" readonly>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Status</label>
+                            <input type="text" class="form-control" name="status" readonly>
+                        </div>
+                    </div>
+
+                    <button id="btn_recover_info" class="btn btn-warning">Recover</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% comment %} SCRIPT SCRIPT SCRIPT {% endcomment %}
+
+<script>
+
+    // DATE PICKER
+
+    $('#datepicker').datepicker({
+        uiLibrary: 'bootstrap5',
+        format: 'yyyy-mm-dd'
+    });
+
+    $('#datepicker2').datepicker({
+        uiLibrary: 'bootstrap5',
+        format: 'yyyy-mm-dd'
+    });
+</script>
+
+<script>
+
+    // DATE PICKER
+
+    $('#datepicker_edit').datepicker({
+        uiLibrary: 'bootstrap5',
+        format: 'yyyy-mm-dd'
+    });
+
+    $('#datepicker2_edit').datepicker({
+        uiLibrary: 'bootstrap5',
+        format: 'yyyy-mm-dd'
+    });
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+// VIEW SUPPLY REQUEST
+
+    $('#alternative-pagination').on('click','.viewButton',function(){
+    var id = $(this).data('id');
+    var req_num = $(this).data('req_num');
+    var staff_name = $(this).data('staff_name');
+    var branch_name = $(this).data('branch_name');
+    var date_requested = $(this).data('date_requested');
+    var driver_staff = $(this).data('driver_staff');
+    var driver_truck = $(this).data('driver_truck');
+    var date_delivered = $(this).data('date_delivered');
+    var status = $(this).data('status');
+        $('#ViewModal').modal('show');
+        $('[name="id_edit"]').val(id);
+        $('[name="req_num"]').val(req_num);
+        $('[name="staff_name"]').val(staff_name);
+        $('[name="branch_name"]').val(branch_name);
+        $('[name="date_requested"]').val(date_requested);
+        $('[name="driver_staff"]').val(driver_staff);
+        $('[name="driver_truck"]').val(driver_truck);
+        $('[name="date_delivered"]').val(date_delivered);
+        $('[name="status"]').val(status);
+
+    });
+
+// EDIT SUPPLY REQUEST
+
+$('#alternative-pagination').on('click','.updateButton',function(){
+    var id = $(this).data('id');
+    var req_num = $(this).data('req_num');
+    var staff_name = $(this).data('staff_name');
+    var branch_name = $(this).data('branch_name');
+    var date_requested = $(this).data('date_requested');
+    var driver_staff = $(this).data('driver_staff');
+    var driver_truck = $(this).data('driver_truck');
+    var date_delivered = $(this).data('date_delivered');
+        $('#UpdateModal').modal('show');
+        $('[name="id_edit"]').val(id);
+        $('[name="req_num_edit"]').val(req_num);
+        $('[name="staff_id_edit"]').val(staff_name);
+        $('[name="branch_id_edit"]').val(branch_name);
+        $('[name="date_requested_edit"]').val(date_requested);
+        $('[name="driver_staff_edit"]').val(driver_staff);
+        $('[name="driver_truck_edit"]').val(driver_truck);
+        $('[name="date_delivered_edit"]').val(date_delivered);
+
+    });
+
+    $('#btn_update_info').on('click',function(e){
+        var id_edit = $('#id_edit').val();
+        var req_num_edit = $('#req_num_edit').val();
+        var staff_id_edit = $('#staff_id_edit').val();
+        var branch_id_edit = $('#branch_id_edit').val();
+        var date_requested_edit = $('#date_requested_edit').val();
+        var driver_staff_edit = $('#driver_staff_edit').val();
+        var driver_truck_edit = $('#driver_truck_edit').val();
+        var date_delivered_edit = $('#date_delivered_edit').val();
+
+            $.ajax({
+                type : "POST",
+                url: "/update_supplyreqs/" + id_edit + "/",
+                dataType: "JSON",
+                data : { id_edit:id_edit,
+                        req_num_edit:req_num_edit,
+                        staff_name_edit:staff_name_edit,
+                        branch_name_edit:branch_name_edit,
+                        date_requested_edit:date_requested_edit,
+                        driver_staff_edit:driver_staff_edit,
+                        driver_truck_edit:driver_truck_edit,
+                        date_delivered_edit:date_delivered_edit},
+                        success: function (data) {
+
+                    $('[name="id_edit"]').val("");
+                    $('[name="req_num_edit"]').val("");
+                    $('[name="staff_name_edit"]').val("");
+                    $('[name="branch_name_edit"]').val("");
+                    $('[name="date_requested_edit"]').val("");
+                    $('[name="driver_staff_edit"]').val("");
+                    $('[name="driver_truck_edit"]').val("");
+                    $('[name="date_delivered_edit"]').val("");
+                    $('#UpdateModal').modal('hide');
+                    window.location.reload();
+                }
+            });
+            return false;
+
+
+    });
+
+// CHANGE SUPPLY REQUEST STATUS
+
+$('#alternative-pagination').on('click','.updateStatusButton',function(){
+    var id = $(this).data('id');
+    var staff_name = $(this).data('staff_name');
+    var branch_name = $(this).data('branch_name');
+    var current_status = $(this).data('status');
+        $('#UpdateStatusModal').modal('show');
+        $('[name="id_status"]').val(id);
+        $('[name="staff_name"]').val(staff_name);
+        $('[name="branch_name"]').val(branch_name);
+
+        // Set the initial dropdown value with "Select Status" option
+        $('#status_status').html('<option value="" selected>Select Status</option>');
+    
+        // Set the status dropdown based on the current status
+        if (current_status === 'ACTIVE') {
+            $('#status_status').append('<option value="DISABLED">Disable</option>');
+        } else if (current_status === 'DISABLED') {
+            $('#status_status').append('<option value="ACTIVE">Activate</option>');
+        } else if (current_status === 'PENDING' || current_status === 'for approval') {
+            // For "PENDING" or "for approval" status, only "Active" and "Disable" options should be available
+            $('#status_status').append('<option value="ACTIVE">Activate</option>');
+            $('#status_status').append('<option value="DISABLED">Disable</option>');
+        }
+    });
+
+    $('#btn_update_status').on('click',function(e){
+        var id_status = $('#id_status').val();
+        var status_status = $('#status_status').val();
+            $.ajax({
+                type : "POST",
+                url: "/update_supplyreqs_status/" + id_status + "/",
+                dataType : "JSON",
+                data : {id_status : id_status, status_status : status_status},
+                success: function(data){
+                    $('[name="id_status"]').val("");
+                    $('[name="status_status"]').val("");
+                    $('#UpdateStatusModal').modal('hide');
+                    window.location.reload();
+                }
+            });
+            return false;
+    });
+
+// DELETE SUPPLY REQUEST
+
+    $('#alternative-pagination').on('click','.deleteButton',function(){
+        var id = $(this).data('id');
+        var req_num = $(this).data('req_num');
+        var staff_name = $(this).data('staff_name');
+        var branch_name = $(this).data('branch_name');
+        var date_requested = $(this).data('date_requested');
+        var driver_truck = $(this).data('driver_truck');
+        var date_delivered = $(this).data('date_delivered');
+        var status = $(this).data('status');
+            $('#DeleteModal').modal('show');
+            $('[name="id_delete"]').val(id);
+            $('[name="req_num"]').val(req_num);
+            $('[name="staff_name"]').val(staff_name);
+            $('[name="branch_name"]').val(branch_name);
+            $('[name="date_requested"]').val(date_requested);
+            $('[name="driver_truck"]').val(driver_truck);
+            $('[name="date_delivered"]').val(date_delivered);
+            $('[name="status"]').val(status);
+            
+    });
+
+    $('#btn_delete_info').on('click',function(e){
+        var id_delete = $('#id_delete').val();
+            $.ajax({
+                type : "POST",
+                url: "/delete_supplyreqs/" + id_delete + "/",
+                dataType : "JSON",
+                data : {id_delete:id_delete},
+                success: function(data){
+                    $('[name="id_delete"]').val("");
+                    $('#DeleteModal').modal('hide');
+                    window.location.reload();
+                }
+            });
+            return false;
+    });
+
+// RECOVER SUPPLY REQUEST
+
+    $('#alternative-pagination').on('click','.recoverButton',function(){
+        var id = $(this).data('id');
+        var req_num = $(this).data('req_num');
+        var staff_name = $(this).data('staff_name');
+        var branch_name = $(this).data('branch_name');
+        var date_requested = $(this).data('date_requested');
+        var driver_truck = $(this).data('driver_truck');
+        var date_delivered = $(this).data('date_delivered');
+        var status = $(this).data('status');
+        $('#RecoverModal').modal('show');
+        $('[name="id_recover"]').val(id);
+            $('[name="req_num"]').val(req_num);
+            $('[name="staff_name"]').val(staff_name);
+            $('[name="branch_name"]').val(branch_name);
+            $('[name="date_requested"]').val(date_requested);
+            $('[name="driver_truck"]').val(driver_truck);
+            $('[name="date_delivered"]').val(date_delivered);
+            $('[name="status"]').val(status);
+            
+    });
+
+    $('#btn_recover_info').on('click',function(e){
+        var id_recover = $('#id_recover').val();
+            $.ajax({
+                type : "POST",
+                url: "/recover_supplyreqs/" + id_recover + "/",
+                dataType : "JSON",
+                data : {id_recover:id_recover},
+                success: function(data){
+                    $('[name="id_delete"]').val("");
+                    $('#RecoverModal').modal('hide');
+                    window.location.reload();
+                }
+            });
+            return false;
+    });
+
+// END SCRIPT
+
+});
+</script>

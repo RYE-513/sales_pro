@@ -1,0 +1,102 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% block title %}Pullout Request{% endblock title %}
+{% block content %}
+<div class="main-content">
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0">Pullout Request</h4>
+                <button type="button" class="btn btn-success btn-label waves-effect waves-light btn-sm" data-bs-toggle="modal" data-bs-target="#addBranch"><i class="ri-add-circle-line label-icon align-middle fs-16 me-2"></i>Add Warehouse</button> <!--MODAL BUTTON-->
+            </div>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+            <div class="card-body">
+                <table id="alternative-pagination" class="table nowrap dt-responsive align-middle table-hover table-bordered" style="width:100%">
+                    <thead class="table-light"> 
+                        <tr>
+                        <th width="15%">Warehouse</th>
+                        <th width="15%">Warehouse Location</th>
+                        <th width="15%">Caretaker</th>
+                        <th width="10%" class="text-center">Status</th>
+                        <th width="10%" class="text-center">Stocks</th>
+                        <th width="10%" class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% comment %} {% for branch in branch_list %}
+                            {% if branch.status != 'DELETED' %} <!-- Adjusted condition to exclude staff with status 'DELETED' --> {% endcomment %}
+                                <tr>
+                                    <td>{{ supply_chain.warehouse }}</td>
+                                    <td>{{ supply_chain.warehouse_location }}</td>
+                                    <td>{{ supply_chain.staff.first_name}} {{ branch.staff.last_name}} </td> <!--  getting the staff from diff module -->
+                                    <td class="text-center">
+                                        {% if branch.status == 'PENDING' %}
+                                            <span class="badge badge-outline-info">For Approval</span>
+                                        {% elif branch.status == 'ACTIVE' %}
+                                            <span class="badge badge-outline-success">Active</span>
+                                        {% elif branch.status == 'DISABLED' %}
+                                            <span class="badge badge-outline-warning">Disabled</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ supply_chain.stocks }}</td>
+                                    <td class="text-center">
+                                        <div class="dropdown d-inline-block">
+                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Actions
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                <li>
+                                                    <button type="button" class="dropdown-item viewButton" data-bs-toggle="modal" data-id="{{branch.id}}" data-branch_name="{{branch.branch_name}}" data-location="{{branch.location}}" data-staff_name="{{branch.staff.first_name}} {{branch.staff.last_name}}" data-status="{{branch.status}}"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>View</button>
+                                                </li>
+                                                <li>
+                                                    <button type="button" class="dropdown-item updateButton" data-bs-toggle="modal" data-id="{{branch.id}}" data-branch_name="{{branch.branch_name}}" data-location="{{branch.location}}" data-staff_name="{{branch.staff.first_name}} {{branch.staff.last_name}}" data-status="{{branch.status}}">
+                                                    <i class="ri-pencil-line align-bottom me-2 text-muted"></i>Edit</button>                                            
+                                                </li>
+
+                                                <li>
+                                                    <button type="button" class="dropdown-item updateStatusButton" data-bs-toggle="modal" data-id="{{branch.id}}" data-branch_name="{{branch.branch_name}}" data-location="{{branch.location}}" data-staff_name="{{branch.staff.first_name}} {{branch.staff.last_name}}" data-status="{{branch.status}}">
+                                                    <i class="ri-pencil-line align-bottom me-2 text-muted"></i>Change Status</button>
+                                                </li>
+
+                                                <li>
+                                                    {% if branch.status == 'DELETED' %}
+                                                        <button type="button" class="dropdown-item recoverButton" data-bs-toggle="modal" data-id="{{branch.id}}" data-branch_name="{{branch.branch_name}}" data-location="{{branch.location}}" data-staff_name="{{branch.staff.first_name}} {{branch.staff.last_name}}" data-status="{{branch.status}}">
+                                                        <i class="ri-pencil-line align-bottom me-2 text-muted"></i>Recover This Data</button>
+                                                    {% else %}
+                                                        <button type="button" class="dropdown-item deleteButton" data-bs-toggle="modal" data-id="{{branch.id}}" data-branch_name="{{branch.branch_name}}" data-location="{{branch.location}}" data-staff_name="{{branch.staff.first_name}} {{branch.staff.last_name}}" data-status="{{branch.status}}">
+                                                        <i class="ri-pencil-line align-bottom me-2 text-muted"></i>Delete This Data</button>
+                                                    {% endif %}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% comment %} {% endif %}
+                        {% endfor %} {% endcomment %}
+                    </tbody>
+                    
+                </table>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+{% comment %} {% include "branches/branch_modals.html" %} {% endcomment %}
+    {% block footer %}
+    {% include "partials/footer.html" %}
+    {% endblock footer %}
+</div>
+{% endblock content %}
+
+
+
+
+
+

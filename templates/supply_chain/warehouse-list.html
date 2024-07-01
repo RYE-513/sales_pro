@@ -1,0 +1,128 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% block title %}Warehousing{% endblock title %}
+{% block content %}
+<div class="main-content">
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0">Warehousing</h4>
+                <button type="button" class="btn btn-success btn-label waves-effect waves-light btn-sm" data-bs-toggle="modal" data-bs-target="#addWarehouse"><i class="ri-add-circle-line label-icon align-middle fs-16 me-2"></i>Add Warehouse</button>
+            </div>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+            <div class="card-body">
+                <table id="alternative-pagination" class="table nowrap dt-responsive align-middle table-hover table-bordered" style="width:100%">
+                    <thead class="table-light"> 
+                        <tr>
+                        <th width="15%" class="text-center">Warehouse</th>
+                        <th width="15%" class="text-center">Warehouse Location</th>
+                        <th width="15%" class="text-center">Caretaker</th>
+                        <th width="10%" class="text-center">Status</th>
+                        <th width="10%" class="text-center">Stocks</th>
+                        <th width="10%" class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for warehouse_get in warehouse_list %}
+                            {% if warehouse_get.status != 'DELETED' %}
+                                <tr>
+                                    <td>{{ warehouse_get.warehouse_name }}</td>
+                                    <td>{{ warehouse_get.location }}</td>
+                                    <td>{{ warehouse_get.staff.first_name}} {{ warehouse_get.staff.last_name}} </td>
+                                    <td class="text-center">
+                                        {% if warehouse_get.status == 'PENDING' %}
+                                            <span class="badge badge-outline-info">For Approval</span>
+                                        {% elif warehouse_get.status == 'ACTIVE' %}
+                                            <span class="badge badge-outline-success">Active</span>
+                                        {% elif warehouse_get.status == 'DISABLED' %}
+                                            <span class="badge badge-outline-warning">Disabled</span>
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="dropdown d-inline-block">
+                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Stocks
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="dropdown d-inline-block">
+                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Actions
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                <li>
+                                                    <button type="button" class="dropdown-item viewButton" data-bs-toggle="modal" 
+                                                    data-id="{{warehouse_get.id}}"
+                                                    data-warehouse_name="{{warehouse_get.warehouse_name}}"
+                                                    data-location="{{warehouse_get.location}}"
+                                                    data-staff_name="{{warehouse_get.staff.first_name}} {{warehouse_get.staff.last_name}}"
+                                                    data-status="{{warehouse_get.status}}">
+                                                    <i class="ri-eye-fill align-bottom me-2 text-muted"></i>View</button>
+                                                </li>
+
+                                                <li>
+                                                    <button type="button" class="dropdown-item updateButton" data-bs-toggle="modal" 
+                                                    data-id="{{warehouse_get.id}}"
+                                                    data-warehouse_name="{{warehouse_get.warehouse_name}}" 
+                                                    data-location="{{warehouse_get.location}}"
+                                                    data-staff_name="{{warehouse_get.staff.first_name}} {{warehouse_get.staff.last_name}}">
+                                                    <i class="ri-pencil-line align-bottom me-2 text-muted"></i>Edit</button>                                            
+                                                </li>
+
+                                                <li>
+                                                    <button type="button" class="dropdown-item updateStatusButton" data-bs-toggle="modal" 
+                                                    data-id="{{warehouse_get.id}}"
+                                                    data-warehouse_name="{{warehouse_get.warehouse_name}}"
+                                                    data-location="{{warehouse_get.location}}"
+                                                    data-staff_name="{{warehouse_get.staff.first_name}} {{warehouse_get.staff.last_name}}"
+                                                    data-status="{{warehouse_get.status}}">
+                                                    <i class="ri-pencil-line align-bottom me-2 text-muted"></i>Change Status</button>
+                                                </li>
+
+                                                <li>
+                                                    {% if warehouse_get.status == 'DELETED' %}
+                                                        <button type="button" class="dropdown-item recoverButton" data-bs-toggle="modal"
+                                                        data-id="{{warehouse_get.id}}"
+                                                        data-warehouse_name="{{warehouse_get.warehouse_name}}"
+                                                        data-location="{{warehouse_get.location}}"
+                                                        data-staff_name="{{warehouse_get.staff.first_name}} {{warehouse_get.staff.last_name}}"
+                                                        data-status="{{warehouse_get.status}}">
+                                                        <i class="ri-pencil-line align-bottom me-2 text-muted"></i>Recover</button>
+                                                    {% else %}
+                                                        <button type="button" class="dropdown-item deleteButton" data-bs-toggle="modal"
+                                                        data-id="{{warehouse_get.id}}"
+                                                        data-warehouse_name="{{warehouse_get.warehouse_name}}"
+                                                        data-location="{{warehouse_get.location}}"
+                                                        data-staff_name="{{warehouse_get.staff.first_name}} {{warehouse_get.staff.last_name}}"
+                                                        data-status="{{warehouse_get.status}}">
+                                                        <i class="ri-pencil-line align-bottom me-2 text-muted"></i>Delete</button>
+                                                    {% endif %}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+{% include "supply_chain/warehouse-modals.html" %}
+    {% block footer %}
+    {% include "partials/footer.html" %}
+    {% endblock footer %}
+</div>
+{% endblock content %}

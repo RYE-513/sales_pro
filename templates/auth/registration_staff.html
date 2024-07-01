@@ -1,0 +1,79 @@
+{% load static %}
+<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable">
+<head>
+    <meta charset="utf-8" />
+    <title>Neighborly | Login</title>
+    <meta name="" content="width=device-width, initial-scale=1.0">
+    <meta content="" name="" />
+    <meta content="" name="" />
+    {% include 'auth/auth_top_include.html' %}
+</head>
+<body>
+    <div class="auth-page-wrapper auth-bg-cover py-5 d-flex justify-content-center align-items-center min-vh-100">
+        <div class="bg-overlay"></div>
+        <div class="auth-page-content overflow-hidden pt-lg-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card overflow-hidden">
+                            <div class="row g-0">
+                                <div class="col-lg-6">
+                                    <div class="p-lg-5 p-4 auth-one-bg h-100" style="background-image: url('{% static 'images/bg/' %}');">
+                                        <div class="bg-overlay"></div>
+                                        <div class="position-relative h-100 d-flex flex-column">
+                                            <div class="mb-4">
+                                                <a href="" class="d-block">
+                                                    <img src="{% static 'images/brand/' %}" alt="" height="100">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                                <div class="col-lg-6">
+                                    <div class="p-lg-5 p-4">
+                                        <div>
+                                            <h4 class="text-primary">Create New Account</h4>
+                                            <p class="text-muted">Sign Up to Home Owners Management Solution</p>
+                                        </div>
+                                        <div class="mt-4">
+                                            <form method="post">
+                                                {% csrf_token %}
+                                                <div class="mb-3">
+                                                    <label for="email" class="form-label">Email</label>
+                                                    <input type="text" class="form-control" id="email" name="username" placeholder="Enter Email">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="username" class="form-label">Username</label>
+                                                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label" for="password-input">Password</label>
+                                                    <div class="position-relative auth-pass-inputgroup mb-3">
+                                                        <input type="password" class="form-control pe-5 password-input" placeholder="Enter password" id="password-input" name="password">
+                                                        <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="mt-4">
+                                                    <button type="submit" class="btn btn-success btn-label waves-effect right waves-light w-100"><i class="ri-user-smile-line label-icon align-middle fs-16 ms-2"></i> Sign Up</button>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <div class="mt-5 text-center">
+                                            <p class="mb-0">Already have an Account ? <a href="{% url "session:login" %}" class="fw-semibold text-primary text-decoration-underline"> Sign In</a> </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'auth/auth_bottom_include.html' %}
+</body>
+</html>

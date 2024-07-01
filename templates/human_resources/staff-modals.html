@@ -1,0 +1,480 @@
+<!-- ADD STAFF -->
+
+<div class="modal fade" id="addStaff" tabindex="-1" aria-labelledby="addStaffModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addStaffModalLabel">Add Staff</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addstaffModalLabel" action="{% url 'human_resources:add_staff'%}" method="post">                
+                    {% csrf_token %}
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="description" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="role_id" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                            <label for="mobile_no" class="form-label">Contact Number</label> 
+                            <div class="input-group"> 
+                                <span class="input-group-text">(+63)</span> 
+                                <input type="text" class="form-control" id="mobile_no" name="mobile_no" placeholder="Contact Number" required> 
+                            </div> 
+                        </div>
+                        
+                        <div class="col-md-6">
+                                <label for="description" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <label for="description" class="form-label" required>Role</label>
+                                <select class="form-control" id="role_id" name="role_id" required>
+                                <option value="">Select Roles</option>
+                                    {% for role in role_list %}
+                                        <option value="{{ role.id }}">{{role.role_name}}</option>
+                                    {% endfor %}
+                                </select>
+
+                                <br>
+                                <button type="submit" class="btn btn-success">Save</button>
+                            </div>
+                        </div>      
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- VIEW STAFF MODAL -->
+
+<div class="modal fade" id="ViewModal" tabindex="-1" aria-labelledby="addStaffModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Staff Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>                
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="first_name" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="first_name_view" name="first_name_view" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="last_name" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="last_name_view" name="last_name_view" readonly>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="mobile_no" class="form-label">Contact Number</label>
+                        <input type="text" class="form-control" id="mobile_no_view" name="mobile_no_view" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="text" class="form-control" id="email_view" name="email_view" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="role" class="form-label">Role</label>
+                        <input type="text" class="form-control" id="role_view" name="role_view" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Status</label>
+                        <input type="text" class="form-control" name="status" readonly>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- EDIT STAFF MODAL -->
+
+<div class="modal fade" id="UpdateModal" tabindex="-1" aria-labelledby="addStaffModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addStaffModalLabel">Edit Staff Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>                
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <input type="" id="id_edit" name="id_edit" readonly hidden>
+                        <label for="description" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="first_name_edit" name="first_name_edit" placeholder"First Name" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="role_id" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="last_name_edit" name="last_name_edit" placeholder"Last Name" required>
+                    </div>
+
+                    <div class="mb-3">
+                            <label for="mobile_no_edit" class="form-label">Contact Number</label>
+                            <div class="input-group">
+                                <span class="input-group-text">(+63)</span>
+                                <input type="text" class="form-control" id="mobile_no_edit" name="mobile_no_edit" placeholder="Mobile Number" oninput="maskContactNumber(this);" required> 
+                            </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" id="email_edit" name="email_edit" placeholder="Email Address" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label" required>Change Role</label>
+                        <select class="form-control" id="role_id" name="role_id" required>
+                        <option value="">Select Roles</option>
+                            {% for role in role_list %}
+                                <option value="{{ role.id }}">{{role.role_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <button id="btn_update_info" class="btn btn-success">Update Data</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CHANGE STAFF STATUS -->
+
+<div class="modal fade" id="UpdateStatusModal" tabindex="-1" aria-labelledby="addStaffModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addStaffModalLabel">Edit Staff Status</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>                
+                    {% csrf_token %}
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <input type="" id="id_status" name="id_status" readonly hidden>
+                            <label for="role_id" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" name="last_name" readonly>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label for="description" class="form-label">First Name</label>
+                            <input type="text" class="form-control"  name="first_name" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label for="description" class="form-label">Change Status</label>
+                            <select class="form-control" id="status_status" name="status_status">
+                                <option value="ACTIVE">Activate</option>
+                                <option value="DISABLED">Disable</option>
+                            </select>
+                        </div>
+                    </div>
+
+                        <button id="btn_update_status" class="btn btn-success">Update Status</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- DELETE STAFF MODAL -->
+
+<div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="addStaffModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addStaffModalLabel">Delete Staff Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>                
+                    {% csrf_token %}
+                    <div class="row mb-3">
+                        <input type="" id="id_delete" name="id_delete" readonly hidden>
+                        <div class="col-md-12">
+                            <label for="role_id" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="last_name" name="last_name" readonly>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label for="description" class="form-label">First Name</label>
+                            <input type="text" class="form-control" name="first_name" readonly>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label for="description" class="form-label">Role</label>
+                            <input type="text" class="form-control" name="role" readonly>
+                        </div>
+                    </div>
+
+                        <button id="btn_delete_info" class="btn btn-danger">Delete Staff</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- RECOVER STAFF MODAL -->
+
+<div class="modal fade" id="RecoverModal" tabindex="-1" aria-labelledby="addStaffModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addStaffModalLabel">Staff Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>                
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <input type="" id="id_recover" name="id_recover" readonly hidden>
+                        <label for="description" class="form-label">First Name</label>
+                        <input type="text" class="form-control" name="first_name" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="role_id" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="last_name" name="last_name" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Status</label>
+                        <input type="text" class="form-control" name="status" readonly>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="role_id" class="form-label">Mobile Number</label>
+                        <input type="text" class="form-control" name="mobile_no" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Email Address</label>
+                        <input type="text" class="form-control" name="email" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Role</label>
+                        <input type="text" class="form-control" name="role" readonly>
+                    </div>
+
+                    <button id="btn_recover_info" class="btn btn-warning">Recover Staff</button>
+                    
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% comment %} SCRIPT SCRIPT SCRIPT {% endcomment %}
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        // VIEW STAFF MODAL
+        $('#alternative-pagination').on('click','.viewButton',function(){
+            var first_name = $(this).data('first_name');
+            var last_name = $(this).data('last_name');
+            var mobile_no = $(this).data('mobile_no');
+            var email = $(this).data('email');
+            var role = $(this).data('role_name');
+            var status = $(this).data('status');
+            $('#ViewModal').modal('show');
+            $('[name="first_name_view"]').val(first_name);
+            $('[name="last_name_view"]').val(last_name);
+            $('[name="status"]').val(status);
+            $('[name="mobile_no_view"]').val(mobile_no);
+            $('[name="email_view"]').val(email);
+            $('[name="role_view"]').val(role);
+        });
+
+        // EDIT STAFF MODAL
+        $('#alternative-pagination').on('click','.updateButton',function(){
+            var id = $(this).data('id');
+            var first_name = $(this).data('first_name');
+            var last_name = $(this).data('last_name');
+            var mobile_no = $(this).data('mobile_no');
+            var email = $(this).data('email');
+            $('#UpdateModal').modal('show');
+            $('[name="id_edit"]').val(id);
+            $('[name="first_name_edit"]').val(first_name);
+            $('[name="last_name_edit"]').val(last_name);
+            $('[name="mobile_no_edit"]').val(mobile_no);
+            $('[name="email_edit"]').val(email);
+        });
+
+        $('#btn_update_info').on('click',function(e){
+            var id_edit = $('#id_edit').val();
+            var first_name_edit = $('#first_name_edit').val();
+            var last_name_edit = $('#last_name_edit').val();
+            var mobile_no_edit = $('#mobile_no_edit').val();
+            var email_edit = $('#email_edit').val();
+            $.ajax({
+                type : "POST",
+                url: "/update_staff/" + id_edit + "/",
+                dataType : "JSON",
+                data : {id_edit:id_edit, first_name_edit:first_name_edit, last_name_edit:last_name_edit, mobile_no_edit:mobile_no_edit, email_edit:email_edit},
+                success: function(data){
+                    $('[name="id_edit"]').val("");
+                    $('[name="first_name_edit"]').val("");
+                    $('[name="last_name_edit"]').val("");
+                    $('[name="mobile_no_edit"]').val("");
+                    $('[name="email_edit"]').val("");
+                    $('#UpdateModal').modal('hide');
+                    window.location.reload();
+                }
+            });
+            return false;
+        });
+
+        // Function to mask the mobile number
+        function maskMobileNumber(mobileNumber) {
+            var formattedNumber = mobileNumber.replace(/\D/g, ''); // Remove non-digits
+            return formattedNumber.replace(/(\d{3})(\d{4})(\d{3})/, '$1-$2-$3'); // Apply the desired format
+        }
+
+        // Function to unmask the mobile number
+        function unmaskMobileNumber(maskedNumber) {
+            return maskedNumber.replace(/\D/g, ''); // Remove non-digits
+        }
+
+        // CHANGE STAFF STATUS
+        $('#alternative-pagination').on('click', '.updateStatusButton', function () {
+            var id = $(this).data('id');
+            var first_name = $(this).data('first_name');
+            var last_name = $(this).data('last_name');
+            var current_status = $(this).data('status');
+
+            $('#UpdateStatusModal').modal('show');
+            $('[name="id_status"]').val(id);
+            $('[name="first_name"]').val(first_name);
+            $('[name="last_name"]').val(last_name);
+
+            // Set the initial dropdown value with "Select Status" option
+            $('#status_status').html('<option value="" selected>Select Status</option>');
+
+            // Set the status dropdown based on the current status
+            if (current_status === 'ACTIVE') {
+                $('#status_status').append('<option value="DISABLED">Disable</option>');
+            } else if (current_status === 'DISABLED') {
+                $('#status_status').append('<option value="ACTIVE">Activate</option>');
+            } else if (current_status === 'PENDING' || current_status === 'for approval') {
+                // For "PENDING" or "for approval" status, only "Active" and "Disable" options should be available
+                $('#status_status').append('<option value="ACTIVE">Activate</option>');
+                $('#status_status').append('<option value="DISABLED">Disable</option>');
+            }
+        });
+
+        $('#btn_update_status').on('click', function (e) {
+            var id_status = $('#id_status').val();
+            var status_status = $('#status_status').val();
+            $.ajax({
+                type: "POST",
+                url: "/update_staff_status/" + id_status + "/",
+                dataType: "JSON",
+                data: { id_status: id_status, status_status: status_status },
+                success: function (data) {
+                    $('[name="id_status"]').val("");
+                    $('[name="status_status"]').val("");
+                    $('#UpdateStatusModal').modal('hide');
+                    window.location.reload();
+                }
+            });
+            return false;
+        });
+
+        // DELETE STAFF
+        $('#alternative-pagination').on('click','.deleteButton',function(){
+            var id = $(this).data('id');
+            var first_name = $(this).data('first_name');
+            var last_name = $(this).data('last_name');
+            var role = $(this).data('role_name');
+            $('#DeleteModal').modal('show');
+            $('[name="id_delete"]').val(id);
+            $('[name="first_name"]').val(first_name);
+            $('[name="last_name"]').val(last_name);
+            $('[name="role"]').val(role);
+        });
+
+        $('#btn_delete_info').on('click',function(e){
+            var id_delete = $('#id_delete').val();
+            $.ajax({
+                type : "POST",
+                url: "/delete_staff/" + id_delete + "/",
+                dataType : "JSON",
+                data : {id_delete:id_delete},
+                success: function(data){
+                    $('[name="id_delete"]').val("");
+                    $('#DeleteModal').modal('hide');
+                    window.location.reload();
+                }
+            });
+            return false;
+        });
+
+        // RECOVER STAFF
+        $('#alternative-pagination').on('click','.recoverButton',function(){
+            var id = $(this).data('id');
+            var first_name = $(this).data('first_name');
+            var last_name = $(this).data('last_name');
+            var role = $(this).data('role_name');
+            var mobile_no = $(this).data('mobile_no');
+            var email = $(this).data('email');
+            var status = $(this).data('status');
+
+            $('#RecoverModal').modal('show');
+            $('[name="id_recover"]').val(id);
+            $('[name="first_name"]').val(first_name);
+            $('[name="last_name"]').val(last_name);
+            $('[name="role"]').val(role);
+            $('[name="status"]').val(status);
+            $('[name="mobile_no"]').val(mobile_no);
+            $('[name="email"]').val(email);
+        });
+
+        $('#btn_recover_info').on('click',function(e){
+            var id_recover = $('#id_recover').val();
+            $.ajax({
+                type : "POST",
+                url: "/recover_staff/" + id_recover + "/",
+                dataType : "JSON",
+                data : {id_recover:id_recover},
+                success: function(data){
+                    $('[name="id_recover"]').val("");
+                    $('#RecoverModal').modal('hide');
+                    window.location.reload();
+                }
+            });
+            return false;
+        });
+
+    });
+</script>

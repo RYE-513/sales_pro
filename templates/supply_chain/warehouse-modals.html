@@ -1,0 +1,451 @@
+<!-- ADD WAREHOUSE -->
+
+<div class="modal fade" id="addWarehouse" tabindex="-1" aria-labelledby="addWarehouseModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addWarehouseModalLabel">Add Warehouse</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addWarehouseModalLabel" action="{% url 'supply_chain:add_warehouse'%}" method="post">                
+                    {% csrf_token %}
+
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label for="role_id" class="form-label">Warehouse Name</label>
+                            <input type="text" class="form-control" id="warehouse_name" name="warehouse_name" placeholder="Warehouse Name" required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label for="description" class="form-label">Location</label>
+                            <input type="text" class="form-control" id="location" name="location" placeholder="Location" required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label for="description" class="form-label">Select Caretaker</label>
+                            <select class="form-control" id="staff_id" name="staff_id" required>
+                                <option value="">Select Caretaker</option>
+                                {% for staff in staff_list %}
+                                    <option value="{{ staff.id }}">{{staff.first_name}} {{staff.last_name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                        <button type="submit" class="btn btn-success">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- VIEW WAREHOUSE MODAL -->
+
+<div class="modal fade" id="ViewModal" tabindex="-1" aria-labelledby="addWarehouseModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addWarehouseModalLabel">Warehouse Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>                
+                    <form>                
+                        {% csrf_token %}
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label for="role_id" class="form-label">Warehouse Name</label>
+                                <input type="text" class="form-control" id="warehouse_name" name="warehouse_name" required>
+                            </div>
+                        </div>
+    
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label for="description" class="form-label">Location</label>
+                                <input type="text" class="form-control" name="location" readonly>
+                            </div>
+                        </div>
+    
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label for="description" class="form-label">Caretaker</label>
+                                <input type="text" class="form-control" name="staff_name" readonly>
+                            </div>
+                        </div>
+    
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label for="description" class="form-label">Status</label>
+                                <input type="text" class="form-control" name="status" readonly>
+                            </div>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- EDIT WAREHOUSE MODAL -->
+
+<div class="modal fade" id="UpdateModal" tabindex="-1" aria-labelledby="addWarehouseModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addWarehouseModalLabel">Update Warehouse Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>                
+                    {% csrf_token %}
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                        <input type="" id="id_edit" name="id_edit" readonly hidden>
+                            <label for="role_id" class="form-label">Warehouse Name</label>
+                            <input type="text" class="form-control" id="warehouse_name_edit" name="warehouse_name_edit" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label for="description" class="form-label">Warehouse Location</label>
+                            <input type="text" class="form-control" id="location_edit" name="location_edit" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label for="description" class="form-label">Change Caretaker</label>
+                            <select class="form-control" id="staff_id_edit" name="staff_id" required>
+                                <option value="">Select Caretaker</option>
+                                {% for staff in staff_list %}
+                                    <option value="{{ staff.id }}">{{staff.first_name}} {{staff.last_name}}</option>
+                                {% endfor %}
+                            </select>    
+                        </div>
+                    </div>
+                    <button id="btn_update_info" class="btn btn-success">Update Data</button>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CHANGE WAREHOUSE STATUS -->
+
+<div class="modal fade" id="UpdateStatusModal" tabindex="-1" aria-labelledby="addWarehouseModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addWarehouseModalLabel">Change Warehouse Status</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>                
+                    {% csrf_token %}
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <input type="" id="id_status" name="id_status" readonly hidden>
+                            <label for="role_id" class="form-label">Warehouse Name</label>
+                            <input type="text" class="form-control" name="warehouse_name" readonly>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label for="description" class="form-label">Location</label>
+                            <input type="text" class="form-control"  name="location" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label for="description" class="form-label" placeholder="Change Status" required>Change Status</label>
+                            <select class="form-control" id="status_status" name="status_status">
+                                <option value="">Select Status</option>
+                                <option value="ACTIVE">Activate</option>
+                                <option value="DISABLED">Disable</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button id="btn_update_status" class="btn btn-success">Update Status</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- DELETE WAREHOUSE MODAL -->
+
+<div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="addWarehouseModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addWarehouseModalLabel">Delete Warehouse Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>                
+                    {% csrf_token %}
+                    <input type="" id="id_delete" name="id_delete" readonly hidden>
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label for="role_id" class="form-label">Warehouse Name</label>
+                            <input type="text" class="form-control" id="warehouse_name" name="warehouse_name" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label for="description" class="form-label">Location</label>
+                            <input type="text" class="form-control" name="location" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label for="description" class="form-label">Caretaker</label>
+                            <input type="text" class="form-control" name="staff_name" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label for="description" class="form-label">Status</label>
+                            <input type="text" class="form-control" name="status" readonly>
+                        </div>
+                    </div>
+                    
+                    <button id="btn_delete_info" class="btn btn-danger">Delete Warehouse</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- RECOVER WAREHOUSE MODAL -->
+
+<div class="modal fade" id="RecoverModal" tabindex="-1" aria-labelledby="addWarehouseModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addWarehouseModalLabel">Warehouse Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>                
+                    {% csrf_token %}
+                        <input type="" id="id_recover" name="id_recover" readonly hidden>
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label for="role_id" class="form-label">Warehouse Name</label>
+                                <input type="text" class="form-control" id="warehouse_name" name="warehouse_name" readonly>
+                            </div>
+                        </div>
+    
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label for="description" class="form-label">Location</label>
+                                <input type="text" class="form-control" name="location" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label for="description" class="form-label">Caretaker</label>
+                                <input type="text" class="form-control" name="staff_name" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label for="description" class="form-label">Status</label>
+                                <input type="text" class="form-control" name="status" readonly>
+                            </div>
+                        </div>
+                        
+                        <button id="btn_recover_info" class="btn btn-warning">Recover</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% comment %} SCRIPT SCRIPT SCRIPT {% endcomment %}
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+// VIEW WAREHOUSE
+
+    $('#alternative-pagination').on('click','.viewButton',function(){
+    var warehouse_name = $(this).data('warehouse_name');
+    var location = $(this).data('location');
+    var staff_name = $(this).data('staff_name');
+    var status = $(this).data('status');
+    var staff = $(this).data('staff');
+        $('#ViewModal').modal('show');
+        $('[name="warehouse_name"]').val(warehouse_name);
+        $('[name="staff_name"]').val(staff_name);
+        $('[name="location"]').val(location);
+        $('[name="status"]').val(status);
+        $('[name="staff"]').val(staff);
+
+    });
+
+// EDIT WAREHOUSE
+
+    $('#alternative-pagination').on('click','.updateButton',function(){
+    var id = $(this).data('id');
+    var warehouse_name = $(this).data('warehouse_name');
+    var location = $(this).data('location');
+        $('#UpdateModal').modal('show');
+        $('[name="id_edit"]').val(id);
+        $('[name="warehouse_name_edit"]').val(warehouse_name);
+        $('[name="location_edit"]').val(location);
+    });
+
+    $('#btn_update_info').on('click',function(e){
+        var id_edit = $('#id_edit').val();
+        var warehouse_name_edit = $('#warehouse_name_edit').val();
+        var location_edit = $('#location_edit').val();
+
+            $.ajax({
+                type : "POST",
+                url: "/update_warehouse/" + id_edit + "/",
+                dataType : "JSON",
+                data : {id_edit:id_edit, warehouse_name_edit:warehouse_name_edit, location_edit:location_edit},
+                success: function(data){
+                    $('[name="id_edit"]').val("");
+                    $('[name="warehouse_name_edit"]').val("");
+                    $('[name="location_edit"]').val("");
+                    $('#UpdateModal').modal('hide');
+                    window.location.reload();
+                }
+            });
+            return false;
+    });
+
+// CHANGE WAREHOUSE STATUS
+
+$('#alternative-pagination').on('click', '.updateStatusButton', function () {
+    var id = $(this).data('id');
+    var warehouse_name = $(this).data('warehouse_name');
+    var location = $(this).data('location');
+    var current_status = $(this).data('status');
+        $('#UpdateStatusModal').modal('show');
+        $('[name="id_status"]').val(id);
+        $('[name="warehouse_name"]').val(warehouse_name);
+        $('[name="location"]').val(location);
+
+        // Set the initial dropdown value with "Select Status" option
+        $('#status_status').html('<option value="" selected>Select Status</option>');
+    
+        // Set the status dropdown based on the current status
+        if (current_status === 'ACTIVE') {
+            $('#status_status').append('<option value="DISABLED">Disable</option>');
+        } else if (current_status === 'DISABLED') {
+            $('#status_status').append('<option value="ACTIVE">Activate</option>');
+        } else if (current_status === 'PENDING' || current_status === 'for approval') {
+            // For "PENDING" or "for approval" status, only "Active" and "Disable" options should be available
+            $('#status_status').append('<option value="ACTIVE">Activate</option>');
+            $('#status_status').append('<option value="DISABLED">Disable</option>');
+        }
+    });
+
+$('#btn_update_status').on('click', function (e) {
+    var id_status = $('#id_status').val();
+    var status_status = $('#status_status').val();
+    $.ajax({
+        type: "POST",
+        url: "/update_warehouse_status/" + id_status + "/",
+        dataType: "JSON",
+        data: { id_status: id_status, status_status : status_status },
+        success: function (data) {
+            $('[name="id_status"]').val("");
+            $('[name="status_status"]').val("");
+            $('#UpdateStatusModal').modal('hide');
+            window.location.reload();
+        }
+    });
+    return false;
+});
+
+// DELETE WAREHOUSE
+
+    $('#alternative-pagination').on('click','.deleteButton',function(){
+        var id = $(this).data('id');
+        var warehouse_name = $(this).data('warehouse_name');
+        var location = $(this).data('location');
+        var staff_name = $(this).data('staff_name');
+        var status = $(this).data('status');
+        var staff = $(this).data('staff');
+            $('#DeleteModal').modal('show');
+            $('[name="id_delete"]').val(id);
+            $('[name="warehouse_name"]').val(warehouse_name);
+            $('[name="location"]').val(location);
+            $('[name="staff_name"]').val(staff_name);
+            $('[name="status"]').val(status);
+            $('[name="staff"]').val(staff);
+    });
+
+    $('#btn_delete_info').on('click',function(e){
+        var id_delete = $('#id_delete').val();
+            $.ajax({
+                type : "POST",
+                url: "/delete_warehouse/" + id_delete + "/",
+                dataType : "JSON",
+                data : {id_delete:id_delete},
+                success: function(data){
+                    $('[name="id_delete"]').val("");
+                    $('#DeleteModal').modal('hide');
+                    window.location.reload();
+                }
+            });
+            return false;
+    });
+
+// RECOVER WAREHOUSE
+
+    $('#alternative-pagination').on('click','.recoverButton',function(){
+        var id = $(this).data('id');
+        var warehouse_name = $(this).data('warehouse_name');
+        var location = $(this).data('location');
+        var staff_name = $(this).data('staff_name');
+        var status = $(this).data('status');
+        var staff_id = $(this).data('staff');
+            $('#RecoverModal').modal('show');
+            $('[name="id_recover"]').val(id);
+            $('[name="warehouse_name"]').val(warehouse_name);
+            $('[name="location"]').val(location);
+            $('[name="staff_name"]').val(staff_name);
+            $('[name="status"]').val(status);
+    });
+
+    $('#btn_recover_info').on('click',function(e){
+        var id_recover = $('#id_recover').val();
+            $.ajax({
+                type : "POST",
+                url: "/recover_warehouse/" + id_recover + "/",
+                dataType : "JSON",
+                data : {id_recover:id_recover},
+                success: function(data){
+                    $('[name="id_delete"]').val("");
+                    $('#RecoverModal').modal('hide');
+                    window.location.reload();
+                }
+            });
+            return false;
+    });
+
+// END SCRIPT
+
+});
+</script>

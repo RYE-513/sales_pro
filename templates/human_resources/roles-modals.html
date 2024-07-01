@@ -1,0 +1,261 @@
+<!-- ADD ROLES -->
+
+<div class="modal fade" id="addRoles" tabindex="-1" aria-labelledby="addRolesModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addRolesModalLabel">Add Roles</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addRolesModalLabel" action="{% url 'human_resources:add_roles'%}" method="post">                
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="role_id" class="form-label">Role Name </label>
+                        <input type="text" class="form-control" id="role_name" name="role_name" placeholder="Role Name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <input type="text" class="form-control" id="description" name="description" placeholder="Description" required>
+                    </div>     
+                    <button type="submit" class="btn btn-success btn-block">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- VIEW ROLE MODAL -->
+
+<div class="modal fade" id="ViewModal" tabindex="-1" aria-labelledby="addRolesModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Role Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>                
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="role_id" class="form-label">Role Name</label>
+                        <input type="text" class="form-control" id="role_name_view" name="role_name_view" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <input type="text" class="form-control" id="description_view" name="description_view" readonly></input>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Status</label>
+                        <input type="text" class="form-control" name="status" readonly>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- EDIT ROLE MODAL -->
+
+<div class="modal fade" id="UpdateModal" tabindex="-1" aria-labelledby="addRolesModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Role Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>                
+                    {% csrf_token %}
+                    <input type="" id="id_edit" name="id_edit" readonly hidden>
+                    <div class="mb-3">
+                        <label for="role_id" class="form-label">Role Name</label>
+                        <input type="text" class="form-control" id="role_name_edit" name="role_name_edit" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <input type="text" class="form-control" id="description_edit" name="description_edit"></input>
+                    </div>     
+                    <button id="btn_update_info" class="btn btn-success btn-block">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- DELETE ROLE MODAL -->
+
+<div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="addRolesModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Role Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>                
+                    {% csrf_token %}
+                    <input type="hidden" id="id_delete" name="id_delete" readonly>
+
+                    <div class="mb-3">
+                        <label for="role_id" class="form-label">Role Name</label>
+                        <input type="text" class="form-control" name="role_name" id="role_name_delete" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <input type="text" class="form-control" name="description" id="description_delete" readonly></input>
+                    </div>     
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Status</label>
+                        <input type="text" class="form-control" name="status" readonly>
+                    </div>
+
+                    <button id="btn_delete_info" class="btn btn-danger btn-block">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- RECOVER ROLE MODAL -->
+
+<div class="modal fade" id="RecoverModal" tabindex="-1" aria-labelledby="addRolesModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Role Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>                
+                    {% csrf_token %}
+                    <input type="hidden" id="id_recover" name="id_recover" readonly>
+                    <div class="mb-3">
+                        <label for="role_id" class="form-label">Role Name</label>
+                        <input type="text" class="form-control" name="role_name" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <input type="text" class="form-control" name="description" readonly></input>
+                    </div>     
+                    <button id="btn_recover_info" class="btn btn-warning btn-block">Recover</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% comment %} SCRIPT SCRIPT SCRIPT {% endcomment %}
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+// VIEW ROLE MODAL
+
+    $('#alternative-pagination').on('click','.viewButton',function(){
+    var role_name = $(this).data('role_name');
+    var description = $(this).data('description');
+    var status = $(this).data('status');
+        $('#ViewModal').modal('show');
+        $('[name="role_name_view"]').val(role_name);
+        $('[name="description_view"]').val(description);
+        $('[name="status"]').val(status);
+    });
+
+// EDIT ROLE MODAL
+
+    $('#alternative-pagination').on('click','.updateButton',function(){
+    var id = $(this).data('id');
+    var role_name = $(this).data('role_name');
+    var description = $(this).data('description');
+        $('#UpdateModal').modal('show');
+        $('[name="id_edit"]').val(id);
+        $('[name="role_name_edit"]').val(role_name);
+        $('[name="description_edit"]').val(description);
+    });
+
+    $('#btn_update_info').on('click',function(e){
+        var id_edit = $('#id_edit').val();
+        var role_name_edit = $('#role_name_edit').val();
+        var description_edit = $('#description_edit').val();
+            $.ajax({
+                type : "POST",
+                url: "/update_role/" + id_edit + "/",
+                dataType : "JSON",
+                data : {id_edit:id_edit, role_name_edit:role_name_edit, description_edit:description_edit},
+                success: function(data){
+                    $('[name="id_edit"]').val("");
+                    $('[name="role_name_edit"]').val("");
+                    $('[name="description_edit"]').val("");
+                    $('#UpdateModal').modal('hide');
+                    window.location.reload();
+                }
+            });
+            return false;
+    });
+
+// DELETE ROLE MODAL
+
+    $('#alternative-pagination').on('click','.deleteButton',function(){
+    var id = $(this).data('id');
+    var role_name = $(this).data('role_name');
+    var description = $(this).data('description');
+    var status = $(this).data('status');
+        $('#DeleteModal').modal('show');
+        $('[name="id_delete"]').val(id);
+        $('[name="role_name"]').val(role_name);
+        $('[name="description"]').val(description);
+        $('[name="status"]').val(status);
+
+    });
+
+    $('#btn_delete_info').on('click',function(e){
+        var id_delete = $('#id_delete').val();
+            $.ajax({
+                type : "POST",
+                url: "/delete_role/" + id_delete + "/",
+                dataType : "JSON",
+                data : {id_delete:id_delete},
+                success: function(data){
+                    $('[name="id_delete"]').val("");
+                    $('#DeleteModal').modal('hide');
+                    window.location.reload();
+                }
+            });
+            return false;
+    });
+
+// RECOVER ROLE MODAL
+
+    $('#alternative-pagination').on('click','.recoverButton',function(){
+        var id = $(this).data('id');
+        var role_name = $(this).data('role_name');
+        var description = $(this).data('description');
+            $('#RecoverModal').modal('show');
+            $('[name="id_recover"]').val(id);
+            $('[name="role_name"]').val(role_name);
+            $('[name="description"]').val(description);
+        });
+
+    $('#btn_recover_info').on('click',function(e){
+        var id_recover = $('#id_recover').val();
+            $.ajax({
+                type : "POST",
+                url: "/recover_role/" + id_recover + "/",
+                dataType : "JSON",
+                data : {id_recover:id_recover},
+                success: function(data){
+                    $('[name="id_recover"]').val("");
+                    $('#RecoverModal').modal('hide');
+                    window.location.reload();
+                }
+            });
+            return false;
+    });
+
+});
+</script>

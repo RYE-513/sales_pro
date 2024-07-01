@@ -1,0 +1,142 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% block title %}Staff{% endblock title %}
+{% block content %}
+<div class="main-content">
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0">Staff</h4>
+                <button type="button" class="btn btn-success btn-label waves-effect waves-light btn-sm" data-bs-toggle="modal" data-bs-target="#addStaff"><i class="ri-add-circle-line label-icon align-middle fs-16 me-2"></i>Add Staff</button> <!--MODAL BUTTON-->
+            </div>
+        </div>
+        
+        </div>
+        <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+            <div class="card-body">
+                <table id="alternative-pagination" class="table nowrap dt-responsive align-middle table-hover table-bordered" style="width:100%">
+                    <thead class="table-light"> 
+                        <tr>
+                        <th width="15%" class="text-center">First Name</th>
+                        <th width="15%" class="text-center">Last Name</th>
+                        <th width="10%" class="text-center">Contact Number</th>
+                        <th width="15%" class="text-center">Email</th>
+                        <th width="15%" class="text-center">Role</th>
+                        <th width="10%" class="text-center">Status</th>
+                        <th width="10%" class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for staff in staff_list %}
+                            {% if staff.status != 'DELETED' %}
+                                <tr>
+                                    <td>{{ staff.first_name }}</td>
+                                    <td>{{ staff.last_name }}</td>
+                                    <td>+63 <span>{{ staff.mobile_no}}</span></td>
+                                    <td>{{ staff.email }}</td>
+                                    <td>{{ staff.role.role_name }}</td>
+                                    <td class="text-center">
+                                        {% if staff.status == 'PENDING' %}
+                                            <span class="badge badge-outline-info">For Approval</span>
+                                        {% elif staff.status == 'ACTIVE' %}
+                                            <span class="badge badge-outline-success">Active</span>
+                                        {% elif staff.status == 'DISABLED' %}
+                                            <span class="badge badge-outline-warning">Disabled</span>
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="dropdown d-inline-block">
+                                            <button class="btn btn-soft-success btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">Actions</button>
+                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                <li>
+                                                    <button type="button" class="dropdown-item viewButton" data-bs-toggle="modal" data-id="{{staff.id}}" data-first_name="{{staff.first_name}}" data-last_name="{{staff.last_name}}" data-role_name="{{staff.role.role_name}}" data-status="{{staff.status}}" data-mobile_no="{{staff.mobile_no}}" data-email="{{staff.email}}">
+                                                    <i class="ri-eye-fill align-bottom me-2 text-muted"></i>View</button>
+                                                </li>
+
+                                                <li>
+                                                    <button type="button" class="dropdown-item updateButton" data-bs-toggle="modal" data-id="{{staff.id}}" data-first_name="{{staff.first_name}}" data-last_name="{{staff.last_name}}" data-role_name="{{staff.role.role_name}}" data-status="{{staff.status}}" data-mobile_no="{{staff.mobile_no}}" data-email="{{staff.email}}">
+                                                    <i class="ri-pencil-line align-bottom me-2 text-muted"></i>Edit</button>                                            
+                                                </li>
+
+                                                <li>
+                                                    <button type="button" class="dropdown-item updateStatusButton" data-bs-toggle="modal" data-id="{{staff.id}}" data-first_name="{{staff.first_name}}" data-last_name="{{staff.last_name}}" data-role_name="{{staff.role.role_name}}" data-status="{{staff.status}}" data-mobile_no="{{staff.mobile_no}}" data-email="{{staff.email}}">
+                                                    <i class="ri-pencil-line align-bottom me-2 text-muted"></i>Change Status</button>
+                                                </li>
+
+                                                <li>
+                                                    {% if staff.status == 'DELETED' %}
+                                                        <button type="button" class="dropdown-item recoverButton" data-bs-toggle="modal" data-id="{{staff.id}}" data-first_name="{{staff.first_name}}" data-last_name="{{staff.last_name}}" data-role_name="{{staff.role.role_name}}" data-status="{{staff.status}}" data-mobile_no="{{staff.mobile_no}}" data-email="{{staff.email}}">
+                                                        <i class="ri-pencil-line align-bottom me-2 text-muted"></i>Recover</button>
+                                                    {% else %}
+                                                        <button type="button" class="dropdown-item deleteButton" data-bs-toggle="modal" data-id="{{staff.id}}" data-first_name="{{staff.first_name}}" data-last_name="{{staff.last_name}}" data-role_name="{{staff.role.role_name}}" data-status="{{staff.status}}" data-mobile_no="{{staff.mobile_no}}" data-email="{{staff.email}}">
+                                                        <i class="ri-delete-bin-2-line align-bottom me-2 text-muted"></i>Delete</button>
+                                                    {% endif %}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                    
+                </table>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+
+</div>
+
+{% comment %} CONTACT NUMBER MASKING {% endcomment %}
+
+<script>
+    function maskContactNumber(input) {
+        var format = "XXX-XXXX-XXX";
+        var value = input.value;
+        var newValue = value.replace(/\D/g, '');
+        var maskedValue = "";
+        var j = 0;
+        for (var i = 0; i < format.length; i++) {
+            if (format[i] === "X") {
+                if (newValue[j] !== undefined) {
+                    maskedValue += newValue[j];
+                    j++;
+                } else {
+                    break;
+                }
+            } else {
+                maskedValue += format[i];
+            }
+        }
+        input.value = maskedValue;
+    }
+
+    var contactNumberInput = document.getElementById("mobile_no");
+
+    // Add event listener to the contact number input field to trigger masking on input
+    contactNumberInput.addEventListener("input", function () {
+        maskContactNumber(this);
+    });
+</script>
+
+{% include "human_resources/staff-modals.html" %}
+
+{% block footer %}
+{% include "partials/footer.html" %}
+{% endblock footer %}
+{% endblock content %}
+
+
+
+
+
+
+
+
