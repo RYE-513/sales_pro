@@ -1,0 +1,82 @@
+<script setup>
+import Supply_Request from '/src/components/supply_chain/supplyreqsTable.vue'
+import PageTitle from '/src/components/supply_chain/supplyreqsPageTitle.vue'
+import AddDataModal from '/src/components/supply_chain/supply-reqs_modals/supplyreqsAddModal.vue'
+import ViewDataModal from '/src/components/supply_chain/supply-reqs_modals/supplyreqsViewModal.vue'
+import EditDataModal from '/src/components/supply_chain/supply-reqs_modals/supplyreqsEditModal.vue'
+import DeleteDataModal from '/src/components/supply_chain/supply-reqs_modals/supplyreqsDeleteModal.vue'
+import RecoverDataModal from '/src/components/supply_chain/supply-reqs_modals/supplyreqsRecoverModal.vue'
+</script>
+<template>
+
+<PageTitle/>
+<div class="row">
+    <div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+        <div class="d-flex align-items-center">
+            <div class="flex-grow-1">
+                <h6 class="card-title mb-0">Supply Request List</h6>
+            </div>
+            <div class="flex-shrink-0">
+                <ul class="list-inline card-toolbar-menu d-flex align-items-center mb-0">
+                    <li class="list-inline-item">
+                    <button type="button" class="btn btn-success btn-label waves-effect waves-light btn-sm" @click="openAddModal">
+                        <i class="ri-add-circle-line label-icon align-middle fs-16 me-2"></i>Add Supply Request
+                    </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        </div>
+        <div class="card-body">
+        <Supply_Request/>
+        </div>
+    </div>
+
+    <AddDataModal ref="addDataModal" @addSupplyReqs="addSupplyReqs" />
+    <ViewDataModal ref="viewDataModal" />
+    <EditDataModal ref="editDataModal" />
+    <DeleteDataModal ref="deleteDataModal" />
+    <RecoverDataModal ref="RecoverDataModal" />
+    </div>
+</div>
+
+</template>
+
+<script>
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  components: {
+    AddDataModal,
+    ViewDataModal,
+    EditDataModal,
+    DeleteDataModal,
+    RecoverDataModal,
+  },
+  methods: {
+
+  // MODALS
+  openAddModal() {
+    this.$refs.addDataModal.openAddModal();
+  },
+  openViewModal() {
+    this.$refs.viewDataModal.openViewModal(); 
+  },
+  openEditModal() {
+    this.$refs.editDataModal.openEditModal();
+  },
+  openDeleteModal() {
+    this.$refs.deleteDataModal.openDeleteModal();
+  },
+  openRecoverModal() {
+    this.$refs.recoverDataModal.openRecoverModal();
+  },
+    addSupplyReqs(supplyreqsData) {
+      // Handle adding new branch here
+      console.log('Adding new supply request:', supplyreqsData);
+    }
+  }
+});
+</script>
