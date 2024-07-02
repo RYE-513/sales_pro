@@ -77,7 +77,8 @@
                                                     data-status="{{supply_reqs_get.status}}">
                                                     <i class="ri-eye-fill align-bottom me-2 text-muted"></i>View</button>
                                                 </li>
-                                                <li>
+
+                                                {% comment %} <li>
                                                     <button type="button" class="dropdown-item updateButton" data-bs-toggle="modal" 
                                                     data-id="{{supply_reqs_get.id}}"
                                                     data-req_num="{{supply_reqs_get.req_num}}" 
@@ -89,7 +90,7 @@
                                                     data-date_delivered="{{supply_reqs_get.date_delivered}}"
                                                     data-status="{{supply_reqs_get.status}}">
                                                     <i class="ri-eye-fill align-bottom me-2 text-muted"></i>Edit</button>                                         
-                                                </li>
+                                                </li> {% endcomment %}
 
                                                 <li>
                                                     <button type="button" class="dropdown-item updateStatusButton" data-bs-toggle="modal"
@@ -97,7 +98,7 @@
                                                     data-staff_name="{{ supply_reqs_get.staff.first_name }} {{ supply_reqs_get.staff.last_name }}"
                                                     data-branch_name="{{supply_reqs_get.branch_name.branch_name}}"
                                                     data-status="{{ supply_reqs_get.status }}">
-                                                    <i class="ri-pencil-line align-bottom me-2 text-muted"></i>Change Status</button>
+                                                    <i class="ri-pencil-line align-bottom me-2 text-muted"></i>Update Status</button>
                                                 </li>
 
                                                 <li>

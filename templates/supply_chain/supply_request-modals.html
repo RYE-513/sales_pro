@@ -141,7 +141,7 @@
 
 <!-- EDIT SUPPLY REQUEST MODAL -->
 
-<div class="modal fade" id="UpdateModal" tabindex="-1" aria-labelledby="addSupplyRequestModalLabel" aria-hidden="true">
+{% comment %} <div class="modal fade" id="UpdateModal" tabindex="-1" aria-labelledby="addSupplyRequestModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -213,9 +213,9 @@
             </div>
         </div>
     </div>
-</div>
+</div> {% endcomment %}
 
-<!-- CHANGE SUPPLY REQUEST STATUS -->
+<!-- EDIT SUPPLY REQUEST STATUS -->
 
 <div class="modal fade" id="UpdateStatusModal" tabindex="-1" aria-labelledby="addSupplyRequestModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -249,7 +249,7 @@
                         </div>
                     </div>
 
-                    <button id="btn_update_status" class="btn btn-success">Update Status</button>
+                    <button id="btn_update_status" class="btn btn-success">Update</button>
                 </form>
             </div>
         </div>
@@ -317,7 +317,7 @@
                             <input type="text" class="form-control" name="status" readonly>
                         </div>
                     </div>
-                    <button id="btn_delete_info" class="btn btn-danger">Delete Supply Request</button>
+                    <button id="btn_delete_info" class="btn btn-danger">Delete</button>
 
                 </form>
 
@@ -572,6 +572,7 @@ $('#alternative-pagination').on('click','.updateStatusButton',function(){
         var staff_name = $(this).data('staff_name');
         var branch_name = $(this).data('branch_name');
         var date_requested = $(this).data('date_requested');
+        var driver_staff = $(this).data('driver_staff');
         var driver_truck = $(this).data('driver_truck');
         var date_delivered = $(this).data('date_delivered');
         var status = $(this).data('status');
@@ -581,6 +582,7 @@ $('#alternative-pagination').on('click','.updateStatusButton',function(){
             $('[name="staff_name"]').val(staff_name);
             $('[name="branch_name"]').val(branch_name);
             $('[name="date_requested"]').val(date_requested);
+            $('[name="driver_staff"]').val(driver_staff);
             $('[name="driver_truck"]').val(driver_truck);
             $('[name="date_delivered"]').val(date_delivered);
             $('[name="status"]').val(status);

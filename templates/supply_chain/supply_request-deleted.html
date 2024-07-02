@@ -81,28 +81,28 @@
                                                 <li>
                                                     {% if supply_reqs_get.status == 'DELETED' %}
                                                         <button type="button" class="dropdown-item recoverButton" data-bs-toggle="modal"
-                                                        data-id="{{supply_reqs_get.id}}"
-                                                        data-req_num="{{supply_reqs_get.req_num}}" 
-                                                        data-staff_name="{{supply_reqs_get.staff.first_name}} {{supply_reqs_get.staff.last_name}}"
-                                                        data-branch_name="{{supply_reqs_get.branch_name.branch_name}}"
-                                                        data-date_requested="{{supply_reqs_get.date_requested}}"
-                                                        data-driver_staff="{{supply_reqs_get.driver_staff.first_name}} {{supply_reqs_get.driver_staff.last_name}}"
-                                                        data-driver_truck="{{supply_reqs_get.driver_truck}}"
-                                                        data-date_delivered="{{supply_reqs_get.date_delivered}}"
-                                                        data-status="{{supply_reqs_get.status}}">
-                                                        <i class="ri-pencil-line align-bottom me-2 text-muted"></i>Recover This Data</button>
+                                                            data-id="{{supply_reqs_get.id}}"
+                                                            data-req_num="{{supply_reqs_get.req_num}}" 
+                                                            data-staff_name="{{supply_reqs_get.staff.first_name}} {{supply_reqs_get.staff.last_name}}"
+                                                            data-branch_name="{{supply_reqs_get.branch_name.branch_name}}"
+                                                            data-date_requested="{{supply_reqs_get.date_requested}}"
+                                                            data-driver_staff="{{supply_reqs_get.driver_staff.first_name}} {{supply_reqs_get.driver_staff.last_name}}"
+                                                            data-driver_truck="{{supply_reqs_get.driver_truck}}"
+                                                            data-date_delivered="{{supply_reqs_get.date_delivered}}"
+                                                            data-status="{{supply_reqs_get.status}}">
+                                                        <i class="ri-refresh-line align-bottom me-2 text-muted"></i>Recover</button>
                                                     {% else %}
                                                         <button type="button" class="dropdown-item deleteButton" data-bs-toggle="modal" 
-                                                        data-id="{{supply_reqs_get.id}}"
-                                                        data-req_num="{{supply_reqs_get.req_num}}" 
-                                                        data-staff_name="{{supply_reqs_get.staff.first_name}} {{supply_reqs_get.staff.last_name}}"
-                                                        data-branch_name="{{supply_reqs_get.branch_name.branch_name}}"
-                                                        data-date_requested="{{supply_reqs_get.date_requested}}"
-                                                        data-driver_staff="{{supply_reqs_get.driver_staff.first_name}} {{supply_reqs_get.driver_staff.last_name}}"
-                                                        data-driver_truck="{{supply_reqs_get.driver_truck}}"
-                                                        data-date_delivered="{{supply_reqs_get.date_delivered}}"
-                                                        data-status="{{supply_reqs_get.status}}">
-                                                        <i class="ri-pencil-line align-bottom me-2 text-muted"></i>Delete</button>
+                                                            data-id="{{supply_reqs_get.id}}"
+                                                            data-req_num="{{supply_reqs_get.req_num}}" 
+                                                            data-staff_name="{{supply_reqs_get.staff.first_name}} {{supply_reqs_get.staff.last_name}}"
+                                                            data-branch_name="{{supply_reqs_get.branch_name.branch_name}}"
+                                                            data-date_requested="{{supply_reqs_get.date_requested}}"
+                                                            data-driver_staff="{{supply_reqs_get.driver_staff.first_name}} {{supply_reqs_get.driver_staff.last_name}}"
+                                                            data-driver_truck="{{supply_reqs_get.driver_truck}}"
+                                                            data-date_delivered="{{supply_reqs_get.date_delivered}}"
+                                                            data-status="{{supply_reqs_get.status}}">
+                                                        <i class="ri-delete-bin-2-line align-bottom me-2 text-muted"></i>>Delete</button>
                                                     {% endif %}
                                                 </li>
                                             </ul>

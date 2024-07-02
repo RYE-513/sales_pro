@@ -52,13 +52,13 @@
                                                             <button type="button" class="dropdown-item viewButton" data-bs-toggle="modal" data-id="{{role.id}}" data-role_name="{{role.role_name}}" data-description="{{role.description}}" data-status="{{role.status}}"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>View</button>
                                                         </li>
                                                         <li>
-                                                            <button type="button" class="dropdown-item updateButton" data-bs-toggle="modal" data-id="{{role.id}}" data-role_name="{{role.role_name}}" data-description="{{role.description}}" data-status="{{role.status}}"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>Edit</button>                                    
+                                                            <button type="button" class="dropdown-item updateButton" data-bs-toggle="modal" data-id="{{role.id}}" data-role_name="{{role.role_name}}" data-description="{{role.description}}" data-status="{{role.status}}"><i class="ri-pencil-line align-bottom me-2 text-muted"></i>Edit</button>                                    
                                                         </li>
                                                         <li>
                                                             {% if role.status == "DELETED" %}
-                                                                <button type="button" class="dropdown-item recoverButton" data-bs-toggle="modal" data-id="{{role.id}}" data-role_name="{{role.role_name}}" data-description="{{role.description}}" data-status="{{role.status}}"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>Recover</button>
+                                                                <button type="button" class="dropdown-item recoverButton" data-bs-toggle="modal" data-id="{{role.id}}" data-role_name="{{role.role_name}}" data-description="{{role.description}}" data-status="{{role.status}}"><i class="ri-refresh-line align-bottom me-2 text-muted"></i>Recover</button>
                                                             {% else %}
-                                                                <button type="button" class="dropdown-item deleteButton" data-bs-toggle="modal" data-id="{{role.id}}" data-role_name="{{role.role_name}}" data-description="{{role.description}}" data-status="{{role.status}}"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>Delete</button>
+                                                                <button type="button" class="dropdown-item deleteButton" data-bs-toggle="modal" data-id="{{role.id}}" data-role_name="{{role.role_name}}" data-description="{{role.description}}" data-status="{{role.status}}"><i class="ri-delete-bin-2-line align-bottom me-2 text-muted"></i>Delete</button>
                                                             {% endif %}
                                                         </li>
                                                     </ul>

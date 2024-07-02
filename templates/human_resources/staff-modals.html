@@ -139,18 +139,8 @@
                         <label for="description" class="form-label">Email Address</label>
                         <input type="email" class="form-control" id="email_edit" name="email_edit" placeholder="Email Address" required>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="description" class="form-label" required>Change Role</label>
-                        <select class="form-control" id="role_id" name="role_id" required>
-                        <option value="">Select Roles</option>
-                            {% for role in role_list %}
-                                <option value="{{ role.id }}">{{role.role_name}}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
                     
-                    <button id="btn_update_info" class="btn btn-success">Update Data</button>
+                    <button id="btn_update_info" class="btn btn-success">Save</button>
 
                 </form>
             </div>
@@ -158,7 +148,7 @@
     </div>
 </div>
 
-<!-- CHANGE STAFF STATUS -->
+<!-- UPDATE STAFF STATUS -->
 
 <div class="modal fade" id="UpdateStatusModal" tabindex="-1" aria-labelledby="addStaffModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -195,7 +185,7 @@
                         </div>
                     </div>
 
-                        <button id="btn_update_status" class="btn btn-success">Update Status</button>
+                        <button id="btn_update_status" class="btn btn-success">Update</button>
                 </form>
             </div>
         </div>
@@ -286,7 +276,7 @@
                         <input type="text" class="form-control" name="role" readonly>
                     </div>
 
-                    <button id="btn_recover_info" class="btn btn-warning">Recover Staff</button>
+                    <button id="btn_recover_info" class="btn btn-warning">Recover</button>
                     
                 </form>
 

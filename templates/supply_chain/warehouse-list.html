@@ -83,26 +83,26 @@
                                                     data-location="{{warehouse_get.location}}"
                                                     data-staff_name="{{warehouse_get.staff.first_name}} {{warehouse_get.staff.last_name}}"
                                                     data-status="{{warehouse_get.status}}">
-                                                    <i class="ri-pencil-line align-bottom me-2 text-muted"></i>Change Status</button>
+                                                    <i class="ri-arrow-up-circle-line align-bottom me-2 text-muted"></i>Update Status</button>
                                                 </li>
 
                                                 <li>
                                                     {% if warehouse_get.status == 'DELETED' %}
                                                         <button type="button" class="dropdown-item recoverButton" data-bs-toggle="modal"
-                                                        data-id="{{warehouse_get.id}}"
-                                                        data-warehouse_name="{{warehouse_get.warehouse_name}}"
-                                                        data-location="{{warehouse_get.location}}"
-                                                        data-staff_name="{{warehouse_get.staff.first_name}} {{warehouse_get.staff.last_name}}"
-                                                        data-status="{{warehouse_get.status}}">
-                                                        <i class="ri-pencil-line align-bottom me-2 text-muted"></i>Recover</button>
+                                                            data-id="{{warehouse_get.id}}"
+                                                            data-warehouse_name="{{warehouse_get.warehouse_name}}"
+                                                            data-location="{{warehouse_get.location}}"
+                                                            data-staff_name="{{warehouse_get.staff.first_name}} {{warehouse_get.staff.last_name}}"
+                                                            data-status="{{warehouse_get.status}}">
+                                                        <i class="ri-refresh-line align-bottom me-2 text-muted"></i>Recover</button>
                                                     {% else %}
                                                         <button type="button" class="dropdown-item deleteButton" data-bs-toggle="modal"
-                                                        data-id="{{warehouse_get.id}}"
-                                                        data-warehouse_name="{{warehouse_get.warehouse_name}}"
-                                                        data-location="{{warehouse_get.location}}"
-                                                        data-staff_name="{{warehouse_get.staff.first_name}} {{warehouse_get.staff.last_name}}"
-                                                        data-status="{{warehouse_get.status}}">
-                                                        <i class="ri-pencil-line align-bottom me-2 text-muted"></i>Delete</button>
+                                                            data-id="{{warehouse_get.id}}"
+                                                            data-warehouse_name="{{warehouse_get.warehouse_name}}"
+                                                            data-location="{{warehouse_get.location}}"
+                                                            data-staff_name="{{warehouse_get.staff.first_name}} {{warehouse_get.staff.last_name}}"
+                                                            data-status="{{warehouse_get.status}}">
+                                                        <i class="ri-delete-bin-2-line align-bottom me-2 text-muted"></i>Delete</button>
                                                     {% endif %}
                                                 </li>
                                             </ul>

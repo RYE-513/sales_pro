@@ -117,17 +117,6 @@
                         </div>
                     </div>
                     
-                    <div class="row mb-3">
-                        <div class="col-md-12">
-                            <label for="description" class="form-label">Change Caretaker</label>
-                            <select class="form-control" id="staff_id_edit" name="staff_id" required>
-                                <option value="">Select Caretaker</option>
-                                {% for staff in staff_list %}
-                                    <option value="{{ staff.id }}">{{staff.first_name}} {{staff.last_name}}</option>
-                                {% endfor %}
-                            </select>    
-                        </div>
-                    </div>
                     <button id="btn_update_info" class="btn btn-success">Update Data</button>
                     
                 </form>
@@ -136,13 +125,13 @@
     </div>
 </div>
 
-<!-- CHANGE WAREHOUSE STATUS -->
+<!-- UPDATE WAREHOUSE STATUS -->
 
 <div class="modal fade" id="UpdateStatusModal" tabindex="-1" aria-labelledby="addWarehouseModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addWarehouseModalLabel">Change Warehouse Status</h5>
+                <h5 class="modal-title" id="addWarehouseModalLabel">Update Warehouse Status</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -174,7 +163,7 @@
                         </div>
                     </div>
 
-                    <button id="btn_update_status" class="btn btn-success">Update Status</button>
+                    <button id="btn_update_status" class="btn btn-success">Update</button>
                 </form>
             </div>
         </div>

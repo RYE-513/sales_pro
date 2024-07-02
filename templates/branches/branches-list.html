@@ -74,16 +74,16 @@
 
                                                 <li>
                                                     <button type="button" class="dropdown-item updateStatusButton" data-bs-toggle="modal" data-id="{{branch.id}}" data-branch_name="{{branch.branch_name}}" data-location="{{branch.location}}" data-staff_name="{{branch.staff.first_name}} {{branch.staff.last_name}}" data-status="{{branch.status}}">
-                                                    <i class="ri-pencil-line align-bottom me-2 text-muted"></i>Change Status</button>
+                                                    <i class="ri-arrow-up-circle-line align-bottom me-2 text-muted"></i>Update Status</button>
                                                 </li>
 
                                                 <li>
                                                     {% if branch.status == 'DELETED' %}
                                                         <button type="button" class="dropdown-item recoverButton" data-bs-toggle="modal" data-id="{{branch.id}}" data-branch_name="{{branch.branch_name}}" data-location="{{branch.location}}" data-staff_name="{{branch.staff.first_name}} {{branch.staff.last_name}}" data-status="{{branch.status}}">
-                                                        <i class="ri-pencil-line align-bottom me-2 text-muted"></i>Recover</button>
+                                                        <i class="ri-undo-line align-bottom me-2 text-muted"></i>Recover</button>
                                                     {% else %}
                                                         <button type="button" class="dropdown-item deleteButton" data-bs-toggle="modal" data-id="{{branch.id}}" data-branch_name="{{branch.branch_name}}" data-location="{{branch.location}}" data-staff_name="{{branch.staff.first_name}} {{branch.staff.last_name}}" data-status="{{branch.status}}">
-                                                        <i class="ri-pencil-line align-bottom me-2 text-muted"></i>Delete</button>
+                                                        <i class="ri-delete-bin-2-line align-bottom me-2 text-muted"></i>Delete</button>
                                                     {% endif %}
                                                 </li>
                                             </ul>

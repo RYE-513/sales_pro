@@ -65,10 +65,10 @@
                                         <li>
                                             {% if staff.status == 'DELETED' %}
                                                 <button type="button" class="dropdown-item recoverButton" data-bs-toggle="modal" data-id="{{staff.id}}" data-first_name="{{staff.first_name}}" data-last_name="{{staff.last_name}}" data-role_name="{{staff.role.role_name}}" data-status="{{staff.status}}" data-mobile_no="{{staff.mobile_no}}" data-email="{{staff.email}}">
-                                                <i class="ri-pencil-line align-bottom me-2 text-muted"></i>Recover</button>
+                                                <i class="ri-refresh-line align-bottom me-2 text-muted"></i>Recover</button>
                                             {% else %}
                                                 <button type="button" class="dropdown-item deleteButton" data-bs-toggle="modal" data-id="{{staff.id}}" data-first_name="{{staff.first_name}}" data-last_name="{{staff.last_name}}" data-role_name="{{staff.role.role_name}}" data-status="{{staff.status}}" data-mobile_no="{{staff.mobile_no}}" data-email="{{staff.email}}">
-                                                <i class="ri-pencil-line align-bottom me-2 text-muted"></i>Delete</button>
+                                                <i class="ri-delete-bin-2-line align-bottom me-2 text-muted"></i>Delete</button>
                                             {% endif %}
                                         
                                         </li>

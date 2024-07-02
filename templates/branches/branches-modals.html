@@ -116,33 +116,21 @@
                             <input type="text" class="form-control" id="location_edit" name="location_edit" required>
                         </div>
                     </div>
-                    
-                    <div class="row mb-3">
-                        <div class="col-md-12">
-                            <label for="description" class="form-label">Change Manager</label>
-                            <select class="form-control" id="staff_id" name="staff_edit" required>
-                                <option value="">Select Manager</option>
-                                {% for staff in staff_list %}
-                                    <option value="{{ staff.id }}">{{staff.first_name}} {{staff.last_name}}</option>
-                                {% endfor %}
-                            </select>    
-                        </div>
-                    </div>
 
-                    <button id="btn_update_info" class="btn btn-success">Update Data</button>
+                    <button id="btn_update_info" class="btn btn-success">Save</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
 
-<!-- CHANGE BRANCH STATUS -->
+<!-- UPDATE BRANCH STATUS -->
 
 <div class="modal fade" id="UpdateStatusModal" tabindex="-1" aria-labelledby="addBranchModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addBranchModalLabel">Update Status</h5>
+                <h5 class="modal-title" id="addBranchModalLabel">Update Branch Status</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -173,7 +161,7 @@
                         </div>
                     </div>
 
-                    <button id="btn_update_status" class="btn btn-success">Update Branch Status</button>
+                    <button id="btn_update_status" class="btn btn-success">Update</button>
                 </form>
             </div>
         </div>
