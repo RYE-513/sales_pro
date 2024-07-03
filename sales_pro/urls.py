@@ -9,7 +9,6 @@ urlpatterns = [
     path('api/', include('branches_others.urls')),
     path('api/', include('human_resources.urls')),
     path('api/', include('supply_chain.urls')),
-    path('api/', include('products.urls')),
 
 
     path('admin/', admin.site.urls),

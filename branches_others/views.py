@@ -6,8 +6,8 @@ from django.http import HttpResponse
 from rest_framework import viewsets
 from rest_framework.response import Response  
 
-from .serializers import SalesSerializer, InOutSerializer, StocksSerializer
-from .models import Sales, In_Out, Stocks
+from .serializers import SalesSerializer, StocksSerializer
+from .models import Sales, Stocks
 
 class SalesViewSet(viewsets.ModelViewSet):
     queryset = Sales.objects.filter(status__in=['Active']).order_by('id')
@@ -29,26 +29,8 @@ class SalesViewSet(viewsets.ModelViewSet):
             data.append(sales_data)
         return Response(data)
 
-class InOutViewSet(viewsets.ModelViewSet):
-    queryset = In_Out.objects.all().order_by('id')
-    serializer_class = InOutSerializer
-
-    def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        data = []
-
-        for in_out in queryset:
-            inout_data = {
-                'id': in_out.id,
-                'category': in_out.category,
-                'is_in': in_out.is_in,
-                'create_date': in_out.create_date,
-            }
-            data.append(inout_data)
-        return Response(data)
-
 class StocksViewSet(viewsets.ModelViewSet):
-    queryset = In_Out.objects.all().order_by('id')
+    queryset = Stocks.objects.all().order_by('id')
     serializer_class = StocksSerializer
 
     def list(self, request, *args, **kwargs):

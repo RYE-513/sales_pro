@@ -43,7 +43,8 @@ TENANT_APPS = (
     'branches_others',
     'human_resources',
     'supply_chain',
-    'products',
+    'logistics',
+    'customers',
     'corsheaders'
 )
 
