@@ -7,10 +7,10 @@ urlpatterns = [
     path('',include('session.urls', namespace='session')),
     path('api/', include('branches.urls')),
     path('api/', include('branches_others.urls')),
+    path('api/', include('customers.urls')),
     path('api/', include('human_resources.urls')),
+    path('api/', include('logistics.urls')),
     path('api/', include('supply_chain.urls')),
-
-
     path('admin/', admin.site.urls),
 ]
 
