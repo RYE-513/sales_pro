@@ -83,19 +83,25 @@ MIDDLEWARE = [
 
 ALLOWED_HOSTS = []
 
-CORS_ALLOW_ALL_ORIGINS = False
-
-# CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:5173/'
+# CORS_ALLOWED_ALL_ORIGINS = 'http://localhost:5173/'
+# CORS_ALLOW_HEADERS = "*"
+# CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_WHITELIST = [
+#     'http://localhost:8000',
+#     'http://localhost:5173',
 # ]
 
-CORS_ALLOWED_ALL_ORIGINS = 'http://localhost:5173/'
-CORS_ALLOW_HEADERS = "*"
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:8000',
-    "http://localhost:5173",
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',
 ]
+
+CORS_ALLOW_HEADERS = [
+    'Content-Type',
+    'Authorization',
+    # Add other headers as needed by your application
+]
+
+# CORS_ALLOW_ALL_ORIGINS = False  # Uncomment if you want to disable all origins by default
 
 ROOT_URLCONF = 'sales_pro.urls'
 
