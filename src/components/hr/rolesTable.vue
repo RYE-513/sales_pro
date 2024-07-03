@@ -12,8 +12,7 @@
         <tr v-for="role in roles" :key="role.id">
           <td style="vertical-align: middle;">{{ role.role }}</td>
           <td style="vertical-align: middle;">{{ role.description }}</td>
-          <td class="text-center">{{ role.status }}
-          </td>
+          <td class="text-center">{{ role.status }}</td>
           <td class="text-center">
             <div class="dropdown d-inline-block">
               <button class="btn btn-soft-info btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="vertical-align: middle;">Actions</button>
