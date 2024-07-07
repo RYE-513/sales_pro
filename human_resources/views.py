@@ -10,7 +10,7 @@ from .serializers import RolesSerializer, StaffSerializer
 from .models import Roles, Staff
 
 class RolesViewSet(viewsets.ModelViewSet):
-    queryset = Roles.objects.filter(status__in=['Active']).order_by('id')
+    queryset = Roles.objects.filter() # (status__in=['Active']).order_by('id')
     serializer_class = RolesSerializer
 
     def list(self, request, *args, **kwargs):
@@ -33,7 +33,10 @@ class StaffViewSet(viewsets.ModelViewSet):
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+
         data = []
+        
         for staff in queryset:
             role_name = f"{staff.role.role_name}"
             staff_data = {

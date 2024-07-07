@@ -30,19 +30,19 @@ class SalesViewSet(viewsets.ModelViewSet):
         return Response(data)
 
 class StocksViewSet(viewsets.ModelViewSet):
-    queryset = Stocks.objects.all().order_by('id')
+    queryset = Stocks.objects.filter()
     serializer_class = StocksSerializer
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
         data = []
-
         for stocks in queryset:
+            warehouse_name = f"{stocks.warehouse.warehouse_name}"
             stocks_data = {
                 'id': stocks.id,
-                'category': stocks.category,
-                'is_in': stocks.is_in,
-                'create_date': stocks.create_date,
+                'warehouse': warehouse_name,
+                'quantity': stocks.quantity,
+                'create_date': stocks.create_date
             }
             data.append(stocks_data)
         return Response(data)
