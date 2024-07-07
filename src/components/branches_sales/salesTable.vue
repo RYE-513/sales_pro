@@ -40,28 +40,29 @@
 import axios from 'axios';
 
 export default {
-    props: ['sales'],
-
 data() {
     return {
-        sales: [],
+    sales: []
     };
-    },
+},
 
-    mounted() {
-    this.fetchData();
-    },
+mounted() {
+    this.fetchSales();
+},
 
-    methods: {
-    fetchData() {
-        axios.get('/api/sales/')
-            .then(response => {
+methods: {
+    fetchSales() {
+    axios.get('http://restful.localhost:8000/api/sales/')
+        .then(response => {
             this.sales = response.data;
         })
         .catch(error => {
-            console.error('Error fetching data:', error);
+            console.error('Error fetching sales:', error);
         });
     },
+    viewBranch(sale) {
+      // Add logic to view branch details here
     }
-};
+}};
+
 </script>

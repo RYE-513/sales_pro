@@ -67,7 +67,7 @@ const trucks = ref([]);
 
     const fetchTrucks = async () => {
     try {
-        const response = await axios.get('/api/trucks/');
+        const response = await axios.get('http://restful.localhost:8000/api/truck/');
         trucks.value = response.data;
         console.log('Fetched trucks:', trucks.value);
     } catch (error) {

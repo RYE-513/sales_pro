@@ -8,12 +8,12 @@
         </tr>
         </thead>
 
-        <tbody>
-        <tr v-for="drivers in drivers" :key="drivers.id">
-            <td style="vertical-align: middle;">{{ drivers.drivers }}</td>
+<tbody>
+        <tr v-for="driver in drivers" :key="driver.id">
+        <td style="vertical-align: middle;">{{ driver.staff }}</td>
 
             <div>
-                <select class="btn btn-sm dropdown" style="max-width: 160px; max-height: 33px; font-size: 11px;" v-model="drivers.status" @change="updateDriverStatus(drivers)">
+                <select class="btn btn-sm dropdown" style="max-width: 160px; max-height: 33px; font-size: 11px;" v-model="driver.status" @change="updateDriverStatus(drivers)">
                 <option value="For Approval" class="btn btn-soft-info btn-sm dropdown">For Approval</option>
                 <option value="Active" class="btn btn-soft-success btn-sm dropdown">Active</option>
                 <option value="Disable" class="btn btn-soft-warning btn-sm dropdown">Disable</option>
@@ -55,21 +55,28 @@
     </table>
 </template>
 
-<script setup>
-import { ref, onMounted } from 'vue';
+<script>
 import axios from 'axios';
 
-const drivers = ref([]);
-
-    const fetchDrivers = async () => {
-    try {
-        const response = await axios.get('/api/drivers/');
-        drivers.value = response.data;
-        console.log('Fetched drivers:', drivers.value);
-    } catch (error) {
-        console.error('Error fetching drivers:', error);
-    }
+export default {
+  data() {
+    return {
+      drivers: [],
     };
-    
-onMounted(fetchDrivers);
+  },
+  created() {
+    this.fetchDrivers();
+  },
+  methods: {
+    fetchDrivers() {
+      axios
+        .get('http://restful.localhost:8000/api/driver/')
+        .then((response) => {
+          this.drivers = response.data;
+        })
+        .catch((error) => {
+          console.error('Error fetching drivers:', error);
+        });
+    }},
+};
 </script>

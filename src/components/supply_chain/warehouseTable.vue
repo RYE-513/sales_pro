@@ -71,12 +71,12 @@ import deleteModal from './warehouse_modals/warehouseDeleteModal.vue';
       }
     },
     mounted() {
-      this.fetchData();
+      this.fetchWarehouses();
     },
   
     methods: {
-      fetchData() {
-        axios.get('/api/warehouses/')
+      fetchWarehouses() {
+        axios.get('http://restful.localhost:8000/api/warehouses/')
           .then(response => {
             this.warehouses = response.data.filter(warehouse => warehouse.status !== 'Deleted')
           })

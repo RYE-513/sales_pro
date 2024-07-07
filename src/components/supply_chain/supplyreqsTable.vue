@@ -66,11 +66,11 @@ export default {
     };
   },
   mounted() {
-    this.fetchData();
+    this.fetchSupplyReqs();
   },
   methods: {
-    fetchData() {
-      axios.get('/api/supplyreqs/')
+    fetchSupplyReqs() {
+      axios.get('http://restful.localhost:8000/api/supplyreqs/')
         .then(response => {
           // this.supply_reqs = response.data;
           this.supply_reqs = response.data.filter(supply_reqs => supply_reqs.status !== 'Deleted');

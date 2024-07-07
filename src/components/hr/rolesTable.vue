@@ -46,11 +46,13 @@
   import axios from 'axios';
   import deleteModal from './role_modals/rolesDeleteModal.vue';
   import editModal from './role_modals/rolesEditModal.vue';
+
   export default {
     components: {
       deleteModal,
       editModal,
     },
+    
     data() {
       return {
         roles: [],
@@ -64,19 +66,19 @@
     },
   
     mounted() {
-      this.fetchData();
+      this.fetchRoles();
     },
   
     methods: {
-      fetchData() {
-        axios.get('/api/roles/')
-            .then(response => {
-              this.roles = response.data.filter(role => role.status !== 'Deleted')
-          })
-          .catch(error => {
-            console.error('Error fetching data:', error);
-          });
-      },
+    fetchRoles() {
+      axios.get('http://restful.localhost:8000/api/roles/')
+        .then(response => {
+          this.roles = response.data;
+        })
+        .catch(error => {
+          console.error('There was an error fetching the roles data:', error);
+        });
+    },
   
       handleAddRole(role) {
         axios.post('/api/roles/', role)

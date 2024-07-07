@@ -45,7 +45,7 @@ export default {
     <div class="dropdown sidebar-user m-1 rounded">
         <button type="button" class="btn material-shadow-none" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="d-flex align-items-center gap-2">
-                <img class="rounded header-profile-user" src="/public/favicon.ico" alt="Header Avatar">
+                <img class="rounded header-profile-user" src="/favicon.ico" alt="Header Avatar">
                 <span class="text-start">
                     <span class="d-block fw-medium sidebar-user-name-text">SALES PRO</span>
                 </span>
@@ -75,7 +75,7 @@ export default {
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <RouterLink to="/branches" class="nav-link" data-key="t-analytics">Branch</RouterLink>
-                                <RouterLink to="/deleted_branches" class="nav-link" data-key="t-analytics">Deleted</RouterLink>
+                                <!-- <RouterLink to="/deleted_branches" class="nav-link" data-key="t-analytics">Deleted</RouterLink> -->
                             </li>
 
                         </ul>
@@ -92,13 +92,13 @@ export default {
                             <li class="nav-item">
                                 <RouterLink to="/roles" class="nav-link" data-key="t-analytics">Roles</RouterLink>
                                 <RouterLink to="/staff" class="nav-link" data-key="t-analytics">Staff</RouterLink>
-                                <RouterLink to="/deleted_hr" class="nav-link" data-key="t-analytics">Deleted</RouterLink>
+                                <!-- <RouterLink to="/deleted_hr" class="nav-link" data-key="t-analytics">Deleted</RouterLink> -->
                             </li>
                         </ul>
                     </div>
                 </li>
 
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarProducts" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
                         <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Products</span>
                     </a>
@@ -112,7 +112,7 @@ export default {
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> -->
 
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarSupplyChain" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">

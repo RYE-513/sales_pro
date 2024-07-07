@@ -51,8 +51,9 @@
 </template>
 
 <script>
+
 import axios from 'axios';
-import editModal from './staff_modals/staffEditModal.vue'
+import editModal from './staff_modals/staffEditModal.vue';
 import deleteModal from './staff_modals/staffDeleteModal.vue';
 
 export default {
@@ -68,14 +69,14 @@ export default {
   },
 
   mounted() {
-    this.fetchData();
+    this.fetchStaffs();
   },
 
   methods: {
-    fetchData() {
-      axios.get('/api/staff/')
+    fetchStaffs() {
+      axios.get('http://restful.localhost:8000/api/staff/')
         .then(response => {
-          this.staffs = response.data.filter(staff => staff.status !== 'Deleted')
+          this.staffs = response.data;
         })
         .catch(error => {
           console.error('Error fetching data:', error);
@@ -83,8 +84,9 @@ export default {
     },
 
     handleAddStaff(staff) {
-      axios.post('/api/staff/', staff)
+      axios.post('http://restful.localhost:8000/api/staff/', staff)
         .then(response => {
+          this.staffs.push(response.data);
           this.$emit('addStaffSuccess', response.data);
         })
         .catch(error => {
@@ -124,4 +126,6 @@ export default {
     }
   },
 };
+
 </script>
+

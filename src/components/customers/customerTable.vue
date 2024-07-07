@@ -28,7 +28,7 @@ const customer = ref([]);
 
     const fetchCustomer = async () => {
     try {
-        const response = await axios.get('/api/customer/');
+        const response = await axios.get('http://restful.localhost:8000/api/customer/');
         customer.value = response.data;
         console.log('Fetched customer:', customer.value);
     } catch (error) {

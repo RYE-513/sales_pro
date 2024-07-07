@@ -72,6 +72,7 @@ export default {
     deleteModal,
     editModal,
   },
+
   data() {
     return {
       branches: [],
@@ -86,12 +87,12 @@ export default {
   },
 
   mounted() {
-    this.fetchData();
+    this.fetchBranches();
   },
 
   methods: {
-    fetchData() {
-      axios.get('/api/branches/')
+    fetchBranches() {
+      axios.get('http://restful.localhost:8000/api/branches/')
           .then(response => {
             this.branches = response.data.filter(branch => branch.status !== 'Deleted')
         })
