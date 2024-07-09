@@ -1,7 +1,6 @@
 from django.db import models
 
 class Roles(models.Model):
-    id = models.AutoField(primary_key=True)
     role_name = models.CharField(max_length=110)
     description = models.TextField()
     STATUS_CHOICES = [
@@ -14,7 +13,6 @@ class Roles(models.Model):
     create_date = models.DateField(auto_now_add=True)
 
 class Staff(models.Model):
-    id = models.AutoField(primary_key=True)
     role = models.ForeignKey(Roles, on_delete=models.CASCADE, db_column="role_id")  # Set a default role ID
     first_name = models.CharField(max_length=110) 
     last_name = models.CharField(max_length=110)

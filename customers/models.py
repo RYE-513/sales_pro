@@ -3,7 +3,6 @@ from branches.models import Branches
 from human_resources.models import Staff
 
 class Customer(models.Model):
-    id = models.AutoField(primary_key=True)
     customer_name = models.CharField(max_length=110)
     STATUS_CHOICES = [
         ("For Approval", "PENDING"),
@@ -15,7 +14,6 @@ class Customer(models.Model):
     create_date = models.DateField(auto_now_add=True)
 
 class Transactions(models.Model):
-    id = models.AutoField(primary_key=True)
     or_number = models.IntegerField()
     branch = models.ForeignKey(Branches, on_delete=models.CASCADE, null=True)
     staff = models.ForeignKey(Staff, on_delete=models.CASCADE, null=True)
